@@ -20,13 +20,13 @@ website:
     pinned: true
     align: center
     tools: 
-      - icon: globe
+      - icon: app
         href: https://github.com/DanWoodrichNOAA/ftnirs-mlapp
         text: "application repository"
       - icon: cpu
         href: https://github.com/DanWoodrichNOAA/ftnirs-ml-codebase
         text: "codebase repository"
-      - icon: github
+      - icon: globe
         href: https://github.com/noaa-afsc/ftnirs-ml-application
         text: "Site repository"
 

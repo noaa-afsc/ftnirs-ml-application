@@ -4,8 +4,8 @@ project:
 website: 
   page-navigation: true
   title: "NOAA quarto simple" 
-  site-url: "https://nmfs-ost.github.io/PAM_template_lab_manual/" 
-  repo-url: "https://github.com/nmfs-ost/PAM_template_lab_manual"
+  site-url: "https://noaa-afsc.github.io/ftnirs-ml-application/" 
+  repo-url: "https://github.com/noaa-afsc/ftnirs-ml-application"
   repo-actions: [edit, source, issue]
   favicon: images/favicon.ico
   
@@ -21,11 +21,15 @@ website:
     align: center
     tools: 
       - icon: globe
-        href: https://nmfs-ost.github.io/PAM_National_NMFS_Network
-        text: "NMFS National Passive Acoustic Monitoring Network"
+        href: https://github.com/DanWoodrichNOAA/ftnirs-mlapp
+        text: "application repository"
+      - icon: cpu
+        href: https://github.com/DanWoodrichNOAA/ftnirs-ml-codebase
+        text: "codebase repository"
       - icon: github
-        href: https://github.com/nmfs-ost/PAM_template_lab_manual
-        text: "NMFS PAM SI Lab Manual Template"
+        href: https://github.com/noaa-afsc/ftnirs-ml-application
+        text: "Site repository"
+
 
     style: "docked"
     search: true

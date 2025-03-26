@@ -4,70 +4,108 @@
     "href": "content/contApp.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Contributing",
+      "App features"
+    ]
   },
   {
     "objectID": "content/Integrative.html",
     "href": "content/Integrative.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Examples",
+      "Integrative"
+    ]
   },
   {
     "objectID": "content/FAQ.html",
     "href": "content/FAQ.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "FAQ"
+    ]
   },
   {
     "objectID": "content/backScience.html",
     "href": "content/backScience.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Background",
+      "The science"
+    ]
   },
   {
     "objectID": "content/useApp.html",
     "href": "content/useApp.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Use",
+      "The app"
+    ]
   },
   {
     "objectID": "content/exCodebase.html",
     "href": "content/exCodebase.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Examples",
+      "The codebase"
+    ]
   },
   {
     "objectID": "content/backDesign.html",
     "href": "content/backDesign.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Background",
+      "The design"
+    ]
   },
   {
     "objectID": "content/contDocumentation.html",
     "href": "content/contDocumentation.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Contributing",
+      "The documentation"
+    ]
   },
   {
     "objectID": "content/exApp.html",
     "href": "content/exApp.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Examples",
+      "The app"
+    ]
   },
   {
     "objectID": "content/Maintaining.html",
     "href": "content/Maintaining.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Maintaining"
+    ]
   },
   {
     "objectID": "index.html",
@@ -94,35 +132,53 @@
     "href": "content/contScience.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Contributing",
+      "Evolving scientific techniques"
+    ]
   },
   {
     "objectID": "content/Examples.html",
     "href": "content/Examples.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Examples"
+    ]
   },
   {
     "objectID": "content/Contributing.html",
     "href": "content/Contributing.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Contributing"
+    ]
   },
   {
     "objectID": "content/useCodebase.html",
     "href": "content/useCodebase.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Use",
+      "The codebase"
+    ]
   },
   {
     "objectID": "content/dataPrep.html",
     "href": "content/dataPrep.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Examples",
+      "Data preparation"
+    ]
   },
   {
     "objectID": "content/Future directions.html",
@@ -136,7 +192,10 @@
     "href": "content/Background.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Background"
+    ]
   },
   {
     "objectID": "content/maintScience.html",
@@ -150,13 +209,20 @@
     "href": "content/selfHost.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Maintaining",
+      "Self-hosting"
+    ]
   },
   {
     "objectID": "content/Use.html",
     "href": "content/Use.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Use"
+    ]
   }
 ]

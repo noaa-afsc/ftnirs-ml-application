@@ -37,8 +37,49 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: content/test.qmd
-        text: "test"
+      - href: content/Background.qmd
+        text: "Background"
+        contents:
+          - href: content/backScience.qmd
+            text: "The science"
+          - href: content/backDesign.qmd
+            text: "The design"
+      - href: content/Use.qmd
+        text: "Use"
+        contents:
+          - href: content/useApp.qmd
+            text: "The app"
+          - href: content/useCodebase.qmd
+            text: "The codebase"
+      - href: content/Examples.qmd
+        text: "Examples"
+        contents:
+          - href: content/dataPrep.qmd
+            text: "Data preparation"
+          - href: content/exApp.qmd
+            text: "The app"
+          - href: content/exCodebase.qmd
+            text: "The codebase"
+          - href: content/Integrative.qmd
+            text: "Integrative"
+      - href: content/Contributing.qmd
+        text: "Contributing"
+          - href: content/contScience.qmd
+            text: "Evolving scientific techniques"
+          - href: content/contApp.qmd
+            text: "App features"
+          - href: content/contDocumentation.qmd
+            text: "The documentation"
+      - href: content/Maintaining.qmd
+        text: "Maintaining"
+          - href: content/maintApp.qmd
+            text: "App features"
+          - href: content/selfHost.qmd
+            text: "Self-hosting"
+      - href: content/Future Directions.qmd
+        text: "Future Directions"
+      - href: content/FAQ.qmd
+        text: "FAQ"
         
 format:
   html:

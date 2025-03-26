@@ -201,11 +201,15 @@
     ]
   },
   {
-    "objectID": "content/maintScience.html",
-    "href": "content/maintScience.html",
+    "objectID": "content/maintApp.html",
+    "href": "content/maintApp.html",
     "title": "Test page",
     "section": "",
-    "text": "contents"
+    "text": "contents",
+    "crumbs": [
+      "Maintaining",
+      "App features"
+    ]
   },
   {
     "objectID": "content/selfHost.html",

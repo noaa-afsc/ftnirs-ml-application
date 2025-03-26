@@ -78,7 +78,7 @@ website:
             text: "App features"
           - href: content/selfHost.qmd
             text: "Self-hosting"
-      - href: content/Future Directions.qmd
+      - href: content/futDirections.qmd
         text: "Future Directions"
       - href: content/FAQ.qmd
         text: "FAQ"

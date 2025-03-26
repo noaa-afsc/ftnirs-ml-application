@@ -54,36 +54,35 @@
     ]
   },
   {
-    "objectID": "content/exCodebase.html",
-    "href": "content/exCodebase.html",
+    "objectID": "content/dataPrep.html",
+    "href": "content/dataPrep.html",
     "title": "Test page",
     "section": "",
     "text": "contents",
     "crumbs": [
       "Examples",
+      "Data preparation"
+    ]
+  },
+  {
+    "objectID": "content/useCodebase.html",
+    "href": "content/useCodebase.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Use",
       "The codebase"
     ]
   },
   {
-    "objectID": "content/backDesign.html",
-    "href": "content/backDesign.html",
+    "objectID": "content/futDirections.html",
+    "href": "content/futDirections.html",
     "title": "Test page",
     "section": "",
     "text": "contents",
     "crumbs": [
-      "Background",
-      "The design"
-    ]
-  },
-  {
-    "objectID": "content/contDocumentation.html",
-    "href": "content/contDocumentation.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Contributing",
-      "The documentation"
+      "Future Directions"
     ]
   },
   {
@@ -159,33 +158,37 @@
     ]
   },
   {
-    "objectID": "content/useCodebase.html",
-    "href": "content/useCodebase.html",
+    "objectID": "content/contDocumentation.html",
+    "href": "content/contDocumentation.html",
     "title": "Test page",
     "section": "",
     "text": "contents",
     "crumbs": [
-      "Use",
-      "The codebase"
+      "Contributing",
+      "The documentation"
     ]
   },
   {
-    "objectID": "content/dataPrep.html",
-    "href": "content/dataPrep.html",
+    "objectID": "content/backDesign.html",
+    "href": "content/backDesign.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Background",
+      "The design"
+    ]
+  },
+  {
+    "objectID": "content/exCodebase.html",
+    "href": "content/exCodebase.html",
     "title": "Test page",
     "section": "",
     "text": "contents",
     "crumbs": [
       "Examples",
-      "Data preparation"
+      "The codebase"
     ]
-  },
-  {
-    "objectID": "content/Future directions.html",
-    "href": "content/Future directions.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents"
   },
   {
     "objectID": "content/Background.html",

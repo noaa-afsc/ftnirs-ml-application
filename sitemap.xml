@@ -1,11 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/test.html</loc>
-    <lastmod>2025-03-19T22:04:22.569Z</lastmod>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/contApp.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Integrative.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/FAQ.html</loc>
+    <lastmod>2025-03-26T00:05:14.353Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/backScience.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/useApp.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/exCodebase.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/backDesign.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/contDocumentation.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/exApp.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Maintaining.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
   </url>
   <url>
     <loc>https://noaa-afsc.github.io/ftnirs-ml-application/index.html</loc>
-    <lastmod>2025-03-19T22:04:22.569Z</lastmod>
+    <lastmod>2025-03-26T00:05:14.355Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/contScience.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Examples.html</loc>
+    <lastmod>2025-03-26T00:05:14.353Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Contributing.html</loc>
+    <lastmod>2025-03-26T00:05:14.353Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/useCodebase.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/dataPrep.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Future directions.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Background.html</loc>
+    <lastmod>2025-03-26T00:05:14.353Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/maintScience.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/selfHost.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
+  </url>
+  <url>
+    <loc>https://noaa-afsc.github.io/ftnirs-ml-application/content/Use.html</loc>
+    <lastmod>2025-03-26T00:05:14.354Z</lastmod>
   </url>
 </urlset>

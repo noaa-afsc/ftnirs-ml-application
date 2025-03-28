@@ -1,10 +1,27 @@
 ---
-title: "Home"
-subtitle: "test"
+title: "Fourier transform near-infrared spectroscopy / machine learning otolith aging application"
+subtitle: "NOAA/NMFS/AFSC"
 page-layout: full
 ---
 
-## Test
+## Abstract
 
-test
+The AFSC Age and Growth Program have pioneered machine learning methods to streamline specimen age predictions from otoliths. The approach is a multimodal convolutional neural network, (MM-
+CNN) as described in Benson et al. (2019), which encorporates two key data modalities: the entire range of wavenumbers of FT-NIR spectra, and corresponding biological and geospatial data. 
 
+During development of this technique, scripts was developed in jupyter notebooks and demonstrated excellent performance in multiple species age prediction (cite). To bring these techniques to a wider audience, the code was refactored into functional programming. The core scripts were refactored into a functional programming codebase that encorporated ideas like data standards and the machine learning lifecycle to promote reuse and extention of the method across a broader range of data and machine learning techniques. 
+
+This codebase was developed in python, and currently supports the following features: 
+
+1. Full machine learning lifecycle: 
+    - Training
+    - Inference
+    - Fine-tuning
+2. Model inference and fine-tuning will use the data given as best possible
+    * Automatic interpolation of spectra as required
+    * New data can be incorporated into fine tuning while preserving existing model weights
+3. Built in features for under-the-hood data formatting
+    * automatic one hot encoding for known categorical variables
+    * awareness of standard variables to promote combining data where appropriate
+
+The application serves to deliver the codebase core logic in an easy to use interface.   

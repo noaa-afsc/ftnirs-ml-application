@@ -75,7 +75,7 @@ website:
         text: "Maintaining"
         contents:
           - href: content/maintApp.qmd
-            text: "App features"
+            text: "App data and models"
           - href: content/selfHost.qmd
             text: "Self-hosting"
       - href: content/futDirections.qmd

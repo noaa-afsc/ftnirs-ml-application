@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Home – NOAA quarto simple</title>
+<title>Fourier transform near-infrared spectroscopy / machine learning otolith aging application – NOAA quarto simple</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -241,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./content/maintApp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">App features</span></a>
+ <span class="menu-text">App data and models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -274,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#test" id="toc-test" class="nav-link active" data-scroll-target="#test">Test</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -283,8 +283,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Home</h1>
-<p class="subtitle lead">test</p>
+<h1 class="title">Fourier transform near-infrared spectroscopy / machine learning otolith aging application</h1>
+<p class="subtitle lead">NOAA/NMFS/AFSC</p>
 </div>
 
 
@@ -301,9 +301,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="test" class="level2">
-<h2 class="anchored" data-anchor-id="test">Test</h2>
-<p>test</p>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>The AFSC Age and Growth Program have pioneered machine learning methods to streamline specimen age predictions from otoliths. The approach is a multimodal convolutional neural network, (MM- CNN) as described in Benson et al.&nbsp;(2019), which encorporates two key data modalities: the entire range of wavenumbers of FT-NIR spectra, and corresponding biological and geospatial data.</p>
+<p>During development of this technique, scripts was developed in jupyter notebooks and demonstrated excellent performance in multiple species age prediction (cite). To bring these techniques to a wider audience, the code was refactored into functional programming. The core scripts were refactored into a functional programming codebase that encorporated ideas like data standards and the machine learning lifecycle to promote reuse and extention of the method across a broader range of data and machine learning techniques.</p>
+<p>This codebase was developed in python, and currently supports the following features:</p>
+<ol type="1">
+<li>Full machine learning lifecycle:
+<ul>
+<li>Training</li>
+<li>Inference</li>
+<li>Fine-tuning</li>
+</ul></li>
+<li>Model inference and fine-tuning will use the data given as best possible
+<ul>
+<li>Automatic interpolation of spectra as required</li>
+<li>New data can be incorporated into fine tuning while preserving existing model weights</li>
+</ul></li>
+<li>Built in features for under-the-hood data formatting
+<ul>
+<li>automatic one hot encoding for known categorical variables</li>
+<li>awareness of standard variables to promote combining data where appropriate</li>
+</ul></li>
+</ol>
+<p>The application serves to deliver the codebase core logic in an easy to use interface.</p>
 
 
 </section>

@@ -1,6 +1,6 @@
 ###
 
-##LINK to published site: 
+## Link to published site: 
 
 https://noaa-afsc.github.io/ftnirs-ml-application/
 

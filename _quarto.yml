@@ -7,7 +7,7 @@ website:
   site-url: "https://noaa-afsc.github.io/ftnirs-ml-application/" 
   repo-url: "https://github.com/noaa-afsc/ftnirs-ml-application"
   repo-actions: [edit, source, issue]
-  favicon: images/fishy.jpg
+  favicon: images/fishy2.jpg
   
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."

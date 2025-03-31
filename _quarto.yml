@@ -3,11 +3,11 @@ project:
 
 website: 
   page-navigation: true
-  title: "NOAA quarto simple" 
+  title: "ftnirs-ml-application Home" 
   site-url: "https://noaa-afsc.github.io/ftnirs-ml-application/" 
   repo-url: "https://github.com/noaa-afsc/ftnirs-ml-application"
   repo-actions: [edit, source, issue]
-  favicon: images/favicon.ico
+  favicon: images/fishy.jpg
   
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."

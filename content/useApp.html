@@ -270,8 +270,18 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a>
+  <ul class="collapse">
+  <li><a href="#formatting-data" id="toc-formatting-data" class="nav-link" data-scroll-target="#formatting-data">Formatting data</a></li>
+  <li><a href="#formatting-models" id="toc-formatting-models" class="nav-link" data-scroll-target="#formatting-models">Formatting models</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/useApp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/useApp.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -295,9 +305,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>contents</p>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<section id="formatting-data" class="level3">
+<h3 class="anchored" data-anchor-id="formatting-data">Formatting data</h3>
+<p>First, you will need to identify a suitable dataset. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:</p>
+<p><strong>What you name columns matters!</strong></p>
+<p>All of the naming conventions are defined at the codebase level, within the file <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a>. Here are some examples of a few of them at the time of writing:</p>
+<ul>
+<li>IDNAME = “id”</li>
+<li>RESPONSENAME = “age”</li>
+<li>WN_STRING_NAME = ’wn**’</li>
+<li>SPLITNAME = “split”</li>
+</ul>
+<p>This means that the codebase and application will give columns with these names special treatment, and so when preparing data you will need to be very aware when you need to name your dataset with on of these columns. Here are their definitions:</p>
+<ul>
+<li><p>id: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present (<strong><em>note to self: check: are there?</em></strong>) The contents are not as important, this could be a path to an image, an integer key, a hash, etc.</p></li>
+<li><p>age: this is the response variable, and while it is not necessary to include in every dataset (such as when this is not available and should be predicted with inference in the app), it is needed for model training or fine-tuning. The app will be flexible if the age column is provided but ages are only available for certain rows- for these datasets, mark missing ages as NA.</p></li>
+<li><p>wn**: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing ‘wn’ (<strong><em>note to self, this is a good back end improvement, should just match to start of string</em></strong>) is a wav number column. The numbers should directly follow the ‘wn’ prefix, so a value 8000 would be specified as “wn8000”. Decimal values are ok, ie wn8000.0023.</p></li>
+<li><p>split: OPTIONAL: this is defined if you would like to define custom training splits during training. If you do want to define training splits, you must define this columns with the exact categories “training”,“validation”,“test” (you may leave out one or two of these as desired). You can also define this column, and within the app still specify app generated splits as desired.</p></li>
+</ul>
+<p>In addition to these specific values, there is also a registry of ‘standard variables’, which help combine like data between different groups and also contain information about the type of data which help for how the application treats these data types. Here is an example of how these are defined:</p>
+<p>STANDARD_COLUMN_NAMES = {IDNAME:{‘data_type’:‘unq_text’}, SPLITNAME:{‘data_type’:‘int’}, ‘catch_year’ : {‘data_type’:‘int’}, ‘catch_month’: {‘data_type’: ‘int’}, ‘catch_day’: {‘data_type’: ‘int’}, ‘sex’ : {‘data_type’:‘categorical’}, RESPONSENAME : {‘data_type’:‘numeric’}, ‘latitude’ : {‘data_type’:‘numeric’}, ‘longitude’ : {‘data_type’:‘numeric’}, ‘region’: {‘data_type’: ‘categorical’}, ‘fish_length’: {‘data_type’: ‘numeric’}, ‘fish_weight’: {‘data_type’: ‘numeric’}, ‘otolith_weight’: {‘data_type’: ‘numeric’}, ‘gear_depth’: {‘data_type’: ‘numeric’}, ‘gear_temp’: {‘data_type’: ‘numeric’} }</p>
+<p>In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (<strong><em>note to self, this is a good back end improvement, define UNITS </em></strong>)</p>
+</section>
+<section id="formatting-models" class="level3">
+<h3 class="anchored" data-anchor-id="formatting-models">Formatting models</h3>
+<ul>
+<li>See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -881,7 +921,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/useApp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/useApp.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/useApp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/useApp.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

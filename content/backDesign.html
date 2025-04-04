@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Test page – ftnirs-ml-application Home</title>
+<title>Application design – ftnirs-ml-application Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -270,15 +270,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#concept" id="toc-concept" class="nav-link active" data-scroll-target="#concept">Concept</a></li>
+  <li><a href="#software-stack" id="toc-software-stack" class="nav-link" data-scroll-target="#software-stack">Software stack</a>
+  <ul class="collapse">
+  <li><a href="#operating-system" id="toc-operating-system" class="nav-link" data-scroll-target="#operating-system">Operating system:</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python:</a></li>
+  <li><a href="#persistent-data" id="toc-persistent-data" class="nav-link" data-scroll-target="#persistent-data">Persistent data:</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/backDesign.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/backDesign.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/Background.html">Background</a></li><li class="breadcrumb-item"><a href="../content/backDesign.html">The design</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Test page</h1>
+<h1 class="title">Application design</h1>
 </div>
 
 
@@ -295,9 +307,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>contents</p>
+<section id="concept" class="level2">
+<h2 class="anchored" data-anchor-id="concept">Concept</h2>
+<p>To bring the scientific technique into operational state, the AFSC Age &amp; Growth program began work with AFSC OFIS in spring of 2024 to make the work more accessible to non-technical users. The core design of any solution involved:</p>
+<ol type="1">
+<li>A python-based ML codebase that contained functions encapsulating the scientific processes</li>
+<li>Software that involved delivery of the codebase in an accessible format</li>
+</ol>
+<p>AFSC Age &amp; Growth program socialized this idea with other science center researchers and NMFS IT community members, before defining the initial concept.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/og_diagram_ftnirs.png" class="img-fluid figure-img"></p>
+<figcaption>Original products concept, March 2024</figcaption>
+</figure>
+</div>
+</section>
+<section id="software-stack" class="level2">
+<h2 class="anchored" data-anchor-id="software-stack">Software stack</h2>
+<section id="operating-system" class="level3">
+<h3 class="anchored" data-anchor-id="operating-system">Operating system:</h3>
+<p>Both codebases are 100% python based, and are cross OS compatible. The application and the ML codebase can, and are, run on both Windows and Linux hosts.</p>
+</section>
+<section id="python" class="level3">
+<h3 class="anchored" data-anchor-id="python">Python:</h3>
+<p>Python is popular programming language with many useful packages for the underlying processes:</p>
+<ul>
+<li>ML codebase core packages:
+<ul>
+<li>Working with data tables (<a href="https://pandas.pydata.org/docs/index.html">pandas</a>)</li>
+<li>Machine learning (<a href="https://www.tensorflow.org/">tensorflow</a> + <a href="https://keras.io/">keras</a>)</li>
+</ul></li>
+<li>Application core packages:
+<ul>
+<li>Application front-end (<a href="https://dash.plotly.com/">Dash</a>)</li>
+<li>Data and machine learning backend (<a href="https://github.com/noaa-afsc/ftnirs-ml-codebase">ML codebase</a>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="persistent-data" class="level3">
+<h3 class="anchored" data-anchor-id="persistent-data">Persistent data:</h3>
+<p>The application itself is stateless, meaning a new hosted copy of the application will perform all needed functions. The application uses Google Cloud Storage on the backend to store persistent data. The application authenticates to Google credentials to communicate with the storage location, and so requires a Google Cloud Project, and the application needs to have access to personal credentials (when running for individual use) or a service account (when running for shared use).</p>
+<p>We are currently hosting the application on GCP with an Ubuntu server, using NGINX for publication to an NMFS internal https port.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -881,7 +935,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/backDesign.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/backDesign.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/backDesign.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/backDesign.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

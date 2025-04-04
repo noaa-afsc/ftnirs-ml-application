@@ -1,5 +1,38 @@
 ---
-title: Test page
+title: Application design
 ---
 
-contents
+## Concept
+
+To bring the scientific technique into operational state, the AFSC Age & Growth program began work with AFSC OFIS in spring of 2024 to make the work more accessible to non-technical users. The core design of any solution involved:
+
+1. A python-based ML codebase that contained functions encapsulating the scientific processes
+2. Software that involved delivery of the codebase in an accessible format
+
+AFSC Age & Growth program socialized this idea with other science center researchers and NMFS IT community members, before defining the initial concept. 
+
+![Original products concept, March 2024](images/og_diagram_ftnirs.png) 
+
+## Software stack
+
+### Operating system: 
+
+Both codebases are 100% python based, and are cross OS compatible. The application and the ML codebase can, and are, 
+run on both Windows and Linux hosts. 
+
+### Python:
+
+Python is popular programming language with many useful packages for the underlying processes:
+ 
+- ML codebase core packages: 
+  * Working with data tables ([pandas](https://pandas.pydata.org/docs/index.html))
+  * Machine learning ([tensorflow](https://www.tensorflow.org/) + [keras](https://keras.io/))
+- Application core packages:
+  * Application front-end ([Dash](https://dash.plotly.com/))
+  * Data and machine learning backend ([ML codebase](https://github.com/noaa-afsc/ftnirs-ml-codebase)) 
+
+### Persistent data: 
+
+The application itself is stateless, meaning a new hosted copy of the application will perform all needed functions. The application uses Google Cloud Storage on the backend to store persistent data. The application authenticates to Google credentials to communicate with the storage location, and so requires a Google Cloud Project, and the application needs to have access to personal credentials (when running for individual use) or a service account (when running for shared use). 
+
+We are currently hosting the application on GCP with an Ubuntu server, using NGINX for publication to an NMFS internal https port. 

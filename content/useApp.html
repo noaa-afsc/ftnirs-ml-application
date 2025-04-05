@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Test page – ftnirs-ml-application Home</title>
+<title>Using the Application – ftnirs-ml-application Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,8 +37,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4379b0ccadffce622b03caf4c46266b3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-2060c1fdc48bdcd166b162226a62f917.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -275,11 +275,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a>
-  <ul class="collapse">
-  <li><a href="#formatting-data" id="toc-formatting-data" class="nav-link" data-scroll-target="#formatting-data">Formatting data</a></li>
-  <li><a href="#formatting-models" id="toc-formatting-models" class="nav-link" data-scroll-target="#formatting-models">Formatting models</a></li>
-  </ul></li>
+  <li><a href="#the-layout" id="toc-the-layout" class="nav-link active" data-scroll-target="#the-layout">The layout</a></li>
+  <li><a href="#inputing-data" id="toc-inputing-data" class="nav-link" data-scroll-target="#inputing-data">Inputing data</a></li>
+  <li><a href="#mode-models-and-approaches" id="toc-mode-models-and-approaches" class="nav-link" data-scroll-target="#mode-models-and-approaches">Mode, models, and approaches</a></li>
+  <li><a href="#data-columns" id="toc-data-columns" class="nav-link" data-scroll-target="#data-columns">Data Columns</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/useApp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/useApp.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -288,7 +287,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/Use.html">Use</a></li><li class="breadcrumb-item"><a href="../content/useApp.html">The app</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Test page</h1>
+<h1 class="title">Using the Application</h1>
 </div>
 
 
@@ -305,13 +304,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
-<section id="formatting-data" class="level3">
-<h3 class="anchored" data-anchor-id="formatting-data">Formatting data</h3>
-<p>First, you will need to identify a suitable dataset. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:</p>
+<section id="the-layout" class="level3">
+<h3 class="anchored" data-anchor-id="the-layout">The layout</h3>
+<details>
+<summary>
+<font size="4">Preparing to run models</font>
+</summary>
+<p>The app components are ordered to go left right / top to bottom, usually in the order you would modify them in a typical workflow.</p>
+<p>At the very top, we have a few buttons. The first is a link to go to the home page (<strong><em>NOTE TO SELF, may deprecate if move to one page app</em></strong>), a link to the documentation (this website), and in the right we have the git versions and buttons with links to the git repos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_top_buttons.png" class="img-fluid figure-img"></p>
+<figcaption>Navigation</figcaption>
+</figure>
+</div>
+<p>In the top left, we have the data upload / select pane.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
+<figcaption>Data browsing and upload section of the app</figcaption>
+</figure>
+</div>
+<p>You can browse through existing datasets in the app or upload further datasets. The datasets will do different things depending on which ‘mode’ is selected (see more details in Mode, Models, and Approaches section).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_mode.png" class="img-fluid figure-img"></p>
+<figcaption>Mode and approach section of the app</figcaption>
+</figure>
+</div>
+<p>To the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices could result in different behaviors (see more details in Data Columns section)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_data_columns.png" class="img-fluid figure-img"></p>
+<figcaption>Data Columns pane</figcaption>
+</figure>
+</div>
+<p>To the right of that, you have options for parameterization. Within this pane, you can choose parameters for signal processing,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_signal_processing.png" class="img-fluid figure-img"></p>
+<figcaption>Parameters pane: signal processing</figcaption>
+</figure>
+</div>
+<p>general parameters for the mode,</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_general_train_params.png" class="img-fluid figure-img"></p>
+<figcaption>Parameters pane: mode general</figcaption>
+</figure>
+</div>
+<p>and specific parameters relevant to the training/fine-tuning approach.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_approach_specific_train_params.png" class="img-fluid figure-img"></p>
+<figcaption>Parameters pane: approach</figcaption>
+</figure>
+</div>
+<p>Once all of these sections have been considered, you can run the particular model event (will vary depending on mode) with the run button.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_run.png" class="img-fluid figure-img"></p>
+<figcaption>Run button</figcaption>
+</figure>
+</div>
+<details>
+<summary>
+<font size="4">Running models</font>
+</summary>
+<p>The run button will execute the model run event based on the parameters provided in the aforementioned sections.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_run.png" class="img-fluid figure-img"></p>
+<figcaption>Run button</figcaption>
+</figure>
+</div>
+<p>While the model is running, there is an intermediate app stage where you will be provided live information.</p>
+</details>
+</details></section>
+<section id="inputing-data" class="level3">
+<h3 class="anchored" data-anchor-id="inputing-data">Inputing data</h3>
+<details>
+<summary>
+<font size="4">Formatting data</font>
+</summary>
+<p>First, you will need to identify the data that you’d like to work with. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:</p>
 <p><strong>What you name columns matters!</strong></p>
-<p>All of the naming conventions are defined at the codebase level, within the file <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a>. Here are some examples of a few of them at the time of writing:</p>
+<p>All of the naming conventions are defined at the codebase level, within the file <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> within the ML codebase. Here are some examples of a few of them at the time of writing:</p>
 <ul>
 <li>IDNAME = “id”</li>
 <li>RESPONSENAME = “age”</li>
@@ -320,23 +398,62 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>This means that the codebase and application will give columns with these names special treatment, and so when preparing data you will need to be very aware when you need to name your dataset with on of these columns. Here are their definitions:</p>
 <ul>
-<li><p>id: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present (<strong><em>note to self: check: are there?</em></strong>) The contents are not as important, this could be a path to an image, an integer key, a hash, etc.</p></li>
+<li><p>id: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present The contents are not as important, this could be a path to an image, an integer key, a hash, etc.</p></li>
 <li><p>age: this is the response variable, and while it is not necessary to include in every dataset (such as when this is not available and should be predicted with inference in the app), it is needed for model training or fine-tuning. The app will be flexible if the age column is provided but ages are only available for certain rows- for these datasets, mark missing ages as NA.</p></li>
-<li><p>wn**: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing ‘wn’ (<strong><em>note to self, this is a good back end improvement, should just match to start of string</em></strong>) is a wav number column. The numbers should directly follow the ‘wn’ prefix, so a value 8000 would be specified as “wn8000”. Decimal values are ok, ie wn8000.0023.</p></li>
+<li><p>wn**: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing ‘wn’ (<strong><em>note to self, this is a good back end improvement, should just match to start of string</em></strong>) is a wav number column. The numbers should directly follow the ‘wn’ prefix, so a value 8000 would be specified as “wn8000”. Decimal values are ok, ie wn8000.0023. The wav numbers can be in ascending or decending order but must be consecutive (cannot have other biological/spatiotemporal columns interspersed between them), and where they are located in the dataframe does not matter. (<strong><em>note to self: test all these assumptions, reduce if more permissive than remembered</em></strong>)</p></li>
 <li><p>split: OPTIONAL: this is defined if you would like to define custom training splits during training. If you do want to define training splits, you must define this columns with the exact categories “training”,“validation”,“test” (you may leave out one or two of these as desired). You can also define this column, and within the app still specify app generated splits as desired.</p></li>
 </ul>
 <p>In addition to these specific values, there is also a registry of ‘standard variables’, which help combine like data between different groups and also contain information about the type of data which help for how the application treats these data types. Here is an example of how these are defined:</p>
 <p>STANDARD_COLUMN_NAMES = {IDNAME:{‘data_type’:‘unq_text’}, SPLITNAME:{‘data_type’:‘int’}, ‘catch_year’ : {‘data_type’:‘int’}, ‘catch_month’: {‘data_type’: ‘int’}, ‘catch_day’: {‘data_type’: ‘int’}, ‘sex’ : {‘data_type’:‘categorical’}, RESPONSENAME : {‘data_type’:‘numeric’}, ‘latitude’ : {‘data_type’:‘numeric’}, ‘longitude’ : {‘data_type’:‘numeric’}, ‘region’: {‘data_type’: ‘categorical’}, ‘fish_length’: {‘data_type’: ‘numeric’}, ‘fish_weight’: {‘data_type’: ‘numeric’}, ‘otolith_weight’: {‘data_type’: ‘numeric’}, ‘gear_depth’: {‘data_type’: ‘numeric’}, ‘gear_temp’: {‘data_type’: ‘numeric’} }</p>
 <p>In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (<strong><em>note to self, this is a good back end improvement, define UNITS </em></strong>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/standard_columns.png" class="img-fluid figure-img"></p>
+<figcaption>Application interpretation of a dataset based on names of columns in dataset</figcaption>
+</figure>
+</div>
+<p>For some examples of properly formatted data, you can refer to sample <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/tree/main/tests/Data">datasets</a> in the tests folder of the ML codebase</p>
+</details>
+<details>
+<summary>
+<font size="4">Chunking data</font>
+</summary>
+<p>There are two ways to consolidate data in the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use.</p>
+<p>Additionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however, allow you to select which columns you’d like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data.</p>
+<p>The app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/id_nonunique.png" class="img-fluid figure-img"></p>
+<figcaption>Application error for non-unique IDs</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+<font size="4">Loading datasets into the application </font>
+</summary>
+<p>To upload data into the app, use the upload button in the top left.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
+<figcaption>Data browsing and upload section of the app</figcaption>
+</figure>
+</div>
+</details>
 </section>
-<section id="formatting-models" class="level3">
-<h3 class="anchored" data-anchor-id="formatting-models">Formatting models</h3>
+<section id="mode-models-and-approaches" class="level3">
+<h3 class="anchored" data-anchor-id="mode-models-and-approaches">Mode, models, and approaches</h3>
+<p>The ML codebase contains better features for inputing models not generated through the application. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format. For inputting models generated through the application, simple path to the output .keras.zip file downloaded from a previous training event.</p>
 <ul>
-<li>See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format.</li>
+<li>If ‘training’ is selected, the selected dataset(s) will function as training data.</li>
+<li>If ‘inference’ is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of ‘age’ if available, otherwise will report histogram of output ages)</li>
+<li>If ‘fine-tuning’ is selected, the selected dataset(s) will function as data for which the model is fine tuned on.</li>
 </ul>
-
-
 </section>
+<section id="data-columns" class="level3">
+<h3 class="anchored" data-anchor-id="data-columns">Data Columns</h3>
+
+
 </section>
 
 </main> <!-- /main -->

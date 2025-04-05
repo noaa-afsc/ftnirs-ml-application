@@ -1,16 +1,71 @@
 ---
-title: Test page
+title: Using the Application
 ---
 
-## Getting started
+### The layout
 
-### Formatting data
+<details>
 
-First, you will need to identify a suitable dataset. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:
+<summary><font size = "4">Preparing to run models</font></summary>
+
+The app components are ordered to go left right / top to bottom, usually in the order you would modify them in a typical workflow. 
+
+At the very top, we have a few buttons. The first is a link to go to the home page (***NOTE TO SELF, may deprecate if move to one page app***), a link to the documentation (this website), and in the right we have the git versions and buttons with links to the git repos. 
+
+![Navigation](/content/images/app_screenshot_top_buttons.png)
+
+In the top left, we have the data upload / select pane. 
+
+![Data browsing and upload section of the app](/content/images/app_screenshot_data.png)
+
+You can browse through existing datasets in the app or upload further datasets. The datasets will do different things depending on which 'mode' is selected (see more details in Mode, Models, and Approaches section). 
+
+![Mode and approach section of the app](/content/images/app_screenshot_mode.png)
+
+To the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices could result in different behaviors (see more details in Data Columns section) 
+
+![Data Columns pane](/content/images/app_screenshot_data_columns.png)
+
+To the right of that, you have options for parameterization. Within this pane, you can choose parameters for signal processing,
+
+![Parameters pane: signal processing](/content/images/app_screenshot_signal_processing.png)
+
+general parameters for the mode, 
+
+![Parameters pane: mode general](/content/images/app_screenshot_general_train_params.png)
+
+and specific parameters relevant to the training/fine-tuning approach.
+
+![Parameters pane: approach](/content/images/app_screenshot_approach_specific_train_params.png)
+
+Once all of these sections have been considered, you can run the particular model event (will vary depending on mode) with the run button. 
+
+![Run button](/content/images/app_screenshot_run.png)
+
+
+<details>
+
+<summary><font size = "4">Running models</font></summary>
+
+The run button will execute the model run event based on the parameters provided in the aforementioned sections.
+
+![Run button](/content/images/app_screenshot_run.png)
+
+While the model is running, there is an intermediate app stage where you will be provided live information. 
+
+</details>
+
+### Inputing data 
+
+<details>
+
+<summary><font size = "4">Formatting data</font></summary>
+
+First, you will need to identify the data that you'd like to work with. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:
 
 **What you name columns matters!**
 
-All of the naming conventions are defined at the codebase level, within the file ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py). Here are some examples of a few of them at the time of writing:
+All of the naming conventions are defined at the codebase level, within the file ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase. Here are some examples of a few of them at the time of writing:
 
 * IDNAME = "id"
 * RESPONSENAME = "age"
@@ -19,11 +74,11 @@ All of the naming conventions are defined at the codebase level, within the file
 
 This means that the codebase and application will give columns with these names special treatment, and so when preparing data you will need to be very aware when you need to name your dataset with on of these columns. Here are their definitions:
 
-* id: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present (***note to self: check: are there?***) The contents are not as important, this could be a path to an image, an integer key, a hash, etc.
+* id: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present  The contents are not as important, this could be a path to an image, an integer key, a hash, etc.
 
 * age: this is the response variable, and while it is not necessary to include in every dataset (such as when this is not available and should be predicted with inference in the app), it is needed for model training or fine-tuning. The app will be flexible if the age column is provided but ages are only available for certain rows- for these datasets, mark missing ages as NA.  
 
-* wn\*\*: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing 'wn' (***note to self, this is a good back end improvement, should just match to start of string***) is a wav number column. The numbers should directly follow the 'wn' prefix, so a value 8000 would be specified as "wn8000". Decimal values are ok, ie wn8000.0023. 
+* wn\*\*: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing 'wn' (***note to self, this is a good back end improvement, should just match to start of string***) is a wav number column. The numbers should directly follow the 'wn' prefix, so a value 8000 would be specified as "wn8000". Decimal values are ok, ie wn8000.0023. The wav numbers can be in ascending or decending order but must be consecutive (cannot have other biological/spatiotemporal columns interspersed between them), and where they are located in the dataframe does not matter. (***note to self: test all these assumptions, reduce if more permissive than remembered***)
 
 * split: OPTIONAL: this is defined if you would like to define custom training splits during training. If you do want to define training splits, you must define this columns with the exact categories "training","validation","test" (you may leave out one or two of these as desired). You can also define this column, and within the app still specify app generated splits as desired.
 
@@ -48,7 +103,43 @@ STANDARD_COLUMN_NAMES = {IDNAME:{'data_type':'unq_text'},
 
 In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (***note to self, this is a good back end improvement, define UNITS ***)
 
+![Application interpretation of a dataset based on names of columns in dataset](/content/images/standard_columns.png)
 
-### Formatting models
+For some examples of properly formatted data, you can refer to sample [datasets](https://github.com/noaa-afsc/ftnirs-ml-codebase/tree/main/tests/Data) in the tests folder of the ML codebase
 
-* See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format. 
+</details>
+
+<details>
+
+<summary><font size = "4">Chunking data</font></summary>
+
+There are two ways to consolidate data in the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use. 
+
+Additionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however,  allow you to select which columns you'd like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data. 
+
+The app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns. 
+
+![Application error for non-unique IDs](/content/images/id_nonunique.png)
+
+</details>
+
+
+<details>
+
+<summary><font size = "4">Loading datasets into the application </font></summary>
+
+To upload data into the app, use the upload button in the top left. 
+
+![Data browsing and upload section of the app](/content/images/app_screenshot_data.png)
+
+</details>
+
+### Mode, models, and approaches
+
+The ML codebase contains better features for inputing models not generated through the application. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format. For inputting models generated through the application, simple path to the output .keras.zip file downloaded from a previous training event. 
+
+* If 'training' is selected, the selected dataset(s) will function as training data. 
+* If 'inference' is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of 'age' if available, otherwise will report histogram of output ages)
+* If 'fine-tuning' is selected, the selected dataset(s) will function as data for which the model is fine tuned on.
+
+### Data Columns 

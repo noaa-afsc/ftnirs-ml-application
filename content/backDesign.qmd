@@ -35,4 +35,4 @@ Python is popular programming language with many useful packages for the underly
 
 The application itself is stateless, meaning a new hosted copy of the application will perform all needed functions. The application uses Google Cloud Storage on the backend to store persistent data. The application authenticates to Google credentials to communicate with the storage location, and so requires a Google Cloud Project, and the application needs to have access to personal credentials (when running for individual use) or a service account (when running for shared use). 
 
-We are currently hosting the application on GCP with an Ubuntu server, using NGINX for publication to an NMFS internal https port. 
+AFSC OFIS/Age and Growth are currently hosting site assets (the server, and the backend cloud storage), on a NOAA GCP organization cloud project belonging to Age and Growth and adminstrated by AFSC OFIS. A hardened (meaning, AFSC secure) Ubuntu Pro image hosts the application in a docker compose stack, and uses NGINX for publication to an NMFS internal https port. 

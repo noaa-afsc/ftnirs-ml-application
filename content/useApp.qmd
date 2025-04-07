@@ -22,7 +22,7 @@ You can browse through existing datasets in the app or upload further datasets. 
 
 ![Mode and approach section of the app](/content/images/app_screenshot_mode.png)
 
-To the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices could result in different behaviors (see more details in Data Columns section) 
+To the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices will result in different behaviors (see more details in Data Columns section) 
 
 ![Data Columns pane](/content/images/app_screenshot_data_columns.png)
 
@@ -30,11 +30,11 @@ To the right of that, you have options for parameterization. Within this pane, y
 
 ![Parameters pane: signal processing](/content/images/app_screenshot_signal_processing.png)
 
-general parameters for the mode, 
+parameters specific to the mode, 
 
 ![Parameters pane: mode general](/content/images/app_screenshot_general_train_params.png)
 
-and specific parameters relevant to the training/fine-tuning approach.
+and parameters specific to the training/fine-tuning approach.
 
 ![Parameters pane: approach](/content/images/app_screenshot_approach_specific_train_params.png)
 
@@ -51,7 +51,21 @@ The run button will execute the model run event based on the parameters provided
 
 ![Run button](/content/images/app_screenshot_run.png)
 
-While the model is running, there is an intermediate app stage where you will be provided live information. 
+While the model is running, there is an intermediate app stage where you will be provided live information. The run button will display as a loading icon during training. Jobs cannot be canceled once started (***NOTE: maybe can change if move to single page app?***) To the left of the run button is logging information for the algorithm process 
+
+![Run button](/content/images/run_in_progress_logs.png)
+
+To the right, is a live display of the training loss and validation loss, commonly used to assess the training time to ensure an appropriate degree of model fitting. 
+
+![Training graph](/content/images/run_in_progress_graph.png)
+
+While model training is ongoing, you will also reserve the # of concurrent tensorflow jobs in the top bar increment up. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention
+
+![Training graph](/content/images/run_in_progress_concurrent.png)
+
+Any errors observed during 
+
+
 
 </details>
 

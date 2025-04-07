@@ -332,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Mode and approach section of the app</figcaption>
 </figure>
 </div>
-<p>To the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices could result in different behaviors (see more details in Data Columns section)</p>
+<p>To the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices will result in different behaviors (see more details in Data Columns section)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_data_columns.png" class="img-fluid figure-img"></p>
@@ -346,14 +346,14 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Parameters pane: signal processing</figcaption>
 </figure>
 </div>
-<p>general parameters for the mode,</p>
+<p>parameters specific to the mode,</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_general_train_params.png" class="img-fluid figure-img"></p>
 <figcaption>Parameters pane: mode general</figcaption>
 </figure>
 </div>
-<p>and specific parameters relevant to the training/fine-tuning approach.</p>
+<p>and parameters specific to the training/fine-tuning approach.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_approach_specific_train_params.png" class="img-fluid figure-img"></p>
@@ -378,7 +378,28 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Run button</figcaption>
 </figure>
 </div>
-<p>While the model is running, there is an intermediate app stage where you will be provided live information.</p>
+<p>While the model is running, there is an intermediate app stage where you will be provided live information. The run button will display as a loading icon during training. Jobs cannot be canceled once started (<strong><em>NOTE: maybe can change if move to single page app?</em></strong>) To the left of the run button is logging information for the algorithm process</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_in_progress_logs.png" class="img-fluid figure-img"></p>
+<figcaption>Run button</figcaption>
+</figure>
+</div>
+<p>To the right, is a live display of the training loss and validation loss, commonly used to assess the training time to ensure an appropriate degree of model fitting.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_in_progress_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Training graph</figcaption>
+</figure>
+</div>
+<p>While model training is ongoing, you will also reserve the # of concurrent tensorflow jobs in the top bar increment up. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_in_progress_concurrent.png" class="img-fluid figure-img"></p>
+<figcaption>Training graph</figcaption>
+</figure>
+</div>
+<p>Any errors observed during</p>
 </details>
 </details></section>
 <section id="inputing-data" class="level3">

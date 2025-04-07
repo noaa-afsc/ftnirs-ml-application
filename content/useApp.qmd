@@ -42,6 +42,7 @@ Once all of these sections have been considered, you can run the particular mode
 
 ![Run button](/content/images/app_screenshot_run.png)
 
+</details>
 
 <details>
 
@@ -51,21 +52,29 @@ The run button will execute the model run event based on the parameters provided
 
 ![Run button](/content/images/app_screenshot_run.png)
 
-While the model is running, there is an intermediate app stage where you will be provided live information. The run button will display as a loading icon during training. Jobs cannot be canceled once started (***NOTE: maybe can change if move to single page app?***) To the left of the run button is logging information for the algorithm process 
+While the model is running, there is an intermediate app stage where you will be provided live information. The run button will display as a loading icon during training. Jobs cannot be canceled once started (***NOTE: maybe can change if move to single page app?***). To the left of the run button is logging information for the algorithm process.
 
-![Run button](/content/images/run_in_progress_logs.png)
+![Event logs](/content/images/run_in_progress_logs.png)
 
-To the right, is a live display of the training loss and validation loss, commonly used to assess the training time to ensure an appropriate degree of model fitting. 
+To the right is a live display of the training loss and validation loss, used to assess the appropriate degree of model fitting and help select a resonable training time or early stopping criterion. 
 
 ![Training graph](/content/images/run_in_progress_graph.png)
 
-While model training is ongoing, you will also reserve the # of concurrent tensorflow jobs in the top bar increment up. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention
+While model training is ongoing, the numner of concurrent tensorflow jobs in the top bar will increment up by one. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention.
 
-![Training graph](/content/images/run_in_progress_concurrent.png)
+![Concurrent tensorflow jobs](/content/images/run_in_progress_concurrent.png)
 
-Any errors observed during 
+Any errors observed during model training will be displayed in the bottom left, accompanied by a banner error. 
 
+![Errors](/content/images/errors.png)
 
+</details>
+
+<details>
+
+<summary><font size = "4">Using model resutls</font></summary>
+
+![Application error for non-unique IDs](/content/images/run_complete.png)
 
 </details>
 
@@ -125,9 +134,9 @@ For some examples of properly formatted data, you can refer to sample [datasets]
 
 <details>
 
-<summary><font size = "4">Chunking data</font></summary>
+<summary><font size = "4">How and if to split up data</font></summary>
 
-There are two ways to consolidate data in the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use. 
+There are two different different philosophies to provide data to the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use. 
 
 Additionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however,  allow you to select which columns you'd like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data. 
 
@@ -155,5 +164,34 @@ The ML codebase contains better features for inputing models not generated throu
 * If 'training' is selected, the selected dataset(s) will function as training data. 
 * If 'inference' is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of 'age' if available, otherwise will report histogram of output ages)
 * If 'fine-tuning' is selected, the selected dataset(s) will function as data for which the model is fine tuned on.
+
+<details>
+
+<summary><font size = "4">Training mode</font></summary>
+
+The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique ("approach"). The "basic model" approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is 'tuned' to optimize performance over a sequence of optimization rounds. 
+
+These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach so they don't have to be hardcoded into the app, as the app will generate them based on the information provided. 
+
+![An example of two different available approaches in the training mode](/content/images/app_screenshot_data.png)
+
+</details>
+
+<details>
+
+<summary><font size = "4">Inference mode</font></summary>
+
+The inference mode is used when a previously trained model exists, and you wish to apply it to a different dataset. The inference mode will take this chosen model and attempt, if compatible, to apply it to the user selected training data (indicated in the data selection pan in the top left). Note that the application will aggressively attempt to make datasets compatible, so pay attention to any information provided in the model metadata as well as in the data pane. Datasets run for inference can include the response column. If the response column is provided, R2 scores will be provided, if not, a histogram of ages with be provided, and if ages are partially known, both will be provided. 
+
+</details>
+
+<details>
+
+<summary><font size = "4">Fine-tuning mode</font></summary>
+
+The fine-tuning mode is used when a previously trained model exists, and you wish to retain some information from the previous weights while 'fine-tuning' it on another dataset. This is an operation that takes some nuance, especially considering the shallow depth of most of these models which make it very easy to discard existing weights if number of training epochs and learning rate (***NOTE to self: is this even in here? Add??***) is not chosen carefully. 
+
+</details>
+
 
 ### Data Columns 

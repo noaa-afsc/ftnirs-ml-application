@@ -14,11 +14,11 @@ At the very top, we have a few buttons. The first is a link to go to the home pa
 
 ![Navigation](/content/images/app_screenshot_top_buttons.png)
 
-In the top left, we have the data upload / select pane. 
+In the top left, we have the data upload / select pane. You can browse through existing datasets in the app or upload further datasets. 
 
 ![Data browsing and upload section of the app](/content/images/app_screenshot_data.png)
 
-You can browse through existing datasets in the app or upload further datasets. The datasets will do different things depending on which 'mode' is selected (see more details in Mode, Models, and Approaches section). 
+The datasets will do different things depending on which 'mode' is selected. 
 
 ![Mode and approach section of the app](/content/images/app_screenshot_mode.png)
 
@@ -58,7 +58,7 @@ While the model is running, there is an intermediate app stage where you will be
 
 To the right is a live display of the training loss and validation loss, used to assess the appropriate degree of model fitting and help select a resonable training time or early stopping criterion. 
 
-![Training graph](/content/images/run_in_progress_graph.png)
+![Training loss curve](/content/images/run_in_progress_graph.png)
 
 While model training is ongoing, the numner of concurrent tensorflow jobs in the top bar will increment up by one. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention.
 
@@ -72,9 +72,27 @@ Any errors observed during model training will be displayed in the bottom left, 
 
 <details>
 
-<summary><font size = "4">Using model resutls</font></summary>
+<summary><font size = "4">Model results</font></summary>
 
-![Application error for non-unique IDs](/content/images/run_complete.png)
+If the model run event has finished without errors, you can scroll down to see outputs relevant to the mode selected. 
+
+![Completed run](/content/images/run_complete.png)
+
+In the center section are stats and graphical artifacts demonstrating model behaviors and performance. Depending on whether truth ages were provided, this will show a truth vs prediction scatterplot, a histogram, or both if age data are partially provided. Color values will indicate splits if in training or fine tuning mode, or dataset name if in inference mode.
+
+![Stats and graphical artifacts](/content/images/run_complete_stats.png)
+
+While also mentioned as a live feedback source while running models, the completed training loss curve is available in the top right. Note that all embedded visualizations have built in features such as allowing zooming, hovering points for more precise values, and saving views as an image directly. 
+
+![Training loss artifact](/content/images/run_complete_loss_curve.png)
+
+On the left are the parameters used for the completed run. There are also two fields where you can add some descriptive information on the run: a name and a description, which are metadata which are attached to exported objects once provided. 
+
+![Model run configuration](/content/images/run_complete_configuration.png)
+
+On the right are a few options to export model results. The download results button downloads run outputs (model objects, age predictions, metadata, etc), and the upload trianed model (only available after training or fine-tuning) allows for you to upload a model so it is available for subsequent inference or fine-tuning by any lab users. After upload, it will be immediately available for further workflows using that trained model. 
+
+![Outputs](/content/images/run_complete_outputs.png)
 
 </details>
 
@@ -140,7 +158,7 @@ There are two different different philosophies to provide data to the app. One i
 
 Additionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however,  allow you to select which columns you'd like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data. 
 
-The app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns. 
+The app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns (***NOTE to self: this is a good QoL feature: temporary datasets.). 
 
 ![Application error for non-unique IDs](/content/images/id_nonunique.png)
 
@@ -153,13 +171,32 @@ The app will flag and reject if there are multiple datasets that contain and equ
 
 To upload data into the app, use the upload button in the top left. 
 
-![Data browsing and upload section of the app](/content/images/app_screenshot_data.png)
+![Data browsing and upload section of the app](/content/images/app_screenshot_data_zoom.png)
 
 </details>
 
-### Mode, models, and approaches
+### Detailed section by section 
 
-The ML codebase contains better features for inputing models not generated through the application. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format. For inputting models generated through the application, simple path to the output .keras.zip file downloaded from a previous training event. 
+
+<details>
+
+<summary><font size = "4">Select Datasets </font></summary>
+
+This section allows you to select from previously uploaded data and upload new datasets. Any .csv file will be accepted, and the app will attempt to use certain columns based on exact matches to naming convention. Depending on the mode, the purpose of the dataset will be variable. For most downstream operations, datasets are used as a vertically concatenated (think 'rbind' in R) combination of all the selected datasets. Output data will use names and unique hashes of these component datasets for record keeping and more detailed breadowns outside of the app. 
+
+See next section for how these selected datasets are used for the different modes. 
+
+![Data browsing and upload section of the app](/content/images/app_screenshot_data_zoom.png)
+
+</details>
+
+<details>
+
+<summary><font size = "4">Select Mode</font></summary>
+
+ML models that fit the application native format can be directly uploaded. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible application model format. For inputting models generated through the application, simply path to the output .keras.zip file downloaded from a previous training event. 
+
+The datasets you have selected will function differently depending on what mode you select:
 
 * If 'training' is selected, the selected dataset(s) will function as training data. 
 * If 'inference' is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of 'age' if available, otherwise will report histogram of output ages)
@@ -167,11 +204,11 @@ The ML codebase contains better features for inputing models not generated throu
 
 <details>
 
-<summary><font size = "4">Training mode</font></summary>
+<summary><font size = "4">Training Mode</font></summary>
 
 The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique ("approach"). The "basic model" approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is 'tuned' to optimize performance over a sequence of optimization rounds. 
 
-These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach so they don't have to be hardcoded into the app, as the app will generate them based on the information provided. 
+These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach, which allows the app to provide them in a more streamlined way (no code development required). 
 
 ![An example of two different available approaches in the training mode](/content/images/app_screenshot_data.png)
 
@@ -193,5 +230,27 @@ The fine-tuning mode is used when a previously trained model exists, and you wis
 
 </details>
 
+</details>
 
-### Data Columns 
+<details>
+
+<summary><font size = "4">Data Columns</font></summary>
+
+The data columns pane is responsive to both:
+
+* The column names in the selected datsets, and
+* The mode selected
+
+The data pane will display the following information: 
+
+1. Wav numbers and spectrography attributes for each different dataset, as well as if they are 'valid' (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)
+2. Whether columns match known reserved names (id, split, age), Standard Column names, or other. 
+3. The number of datasets where the particular column is included.
+4. Any special treatment of that particular column. This can include: 
+    * treated as a reserved column name (unselectable- automatically used)
+    * one hot encoding was applied (default for standard columns marked as 'categorical' type)
+
+![Information in Data Columns](/content/images/data_columns_lots_o_details.png)
+
+
+</details>

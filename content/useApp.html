@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4379b0ccadffce622b03caf4c46266b3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2060c1fdc48bdcd166b162226a62f917.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e4d3cb51edf2c14782895a859c931f1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-0045eb1c33f61f19c2496553aa0e9380.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -277,8 +277,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#the-layout" id="toc-the-layout" class="nav-link active" data-scroll-target="#the-layout">The layout</a></li>
   <li><a href="#inputing-data" id="toc-inputing-data" class="nav-link" data-scroll-target="#inputing-data">Inputing data</a></li>
-  <li><a href="#mode-models-and-approaches" id="toc-mode-models-and-approaches" class="nav-link" data-scroll-target="#mode-models-and-approaches">Mode, models, and approaches</a></li>
-  <li><a href="#data-columns" id="toc-data-columns" class="nav-link" data-scroll-target="#data-columns">Data Columns</a></li>
+  <li><a href="#detailed-section-by-section" id="toc-detailed-section-by-section" class="nav-link" data-scroll-target="#detailed-section-by-section">Detailed section by section</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/useApp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/useApp.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -318,14 +317,14 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Navigation</figcaption>
 </figure>
 </div>
-<p>In the top left, we have the data upload / select pane.</p>
+<p>In the top left, we have the data upload / select pane. You can browse through existing datasets in the app or upload further datasets.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
 <figcaption>Data browsing and upload section of the app</figcaption>
 </figure>
 </div>
-<p>You can browse through existing datasets in the app or upload further datasets. The datasets will do different things depending on which ‘mode’ is selected (see more details in Mode, Models, and Approaches section).</p>
+<p>The datasets will do different things depending on which ‘mode’ is selected.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_mode.png" class="img-fluid figure-img"></p>
@@ -390,7 +389,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/run_in_progress_graph.png" class="img-fluid figure-img"></p>
-<figcaption>Training graph</figcaption>
+<figcaption>Training loss curve</figcaption>
 </figure>
 </div>
 <p>While model training is ongoing, the numner of concurrent tensorflow jobs in the top bar will increment up by one. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention.</p>
@@ -410,12 +409,41 @@ ul.task-list li input[type="checkbox"] {
 </details>
 <details>
 <summary>
-<font size="4">Using model resutls</font>
+<font size="4">Model results</font>
 </summary>
+<p>If the model run event has finished without errors, you can scroll down to see outputs relevant to the mode selected.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/run_complete.png" class="img-fluid figure-img"></p>
-<figcaption>Application error for non-unique IDs</figcaption>
+<figcaption>Completed run</figcaption>
+</figure>
+</div>
+<p>In the center section are stats and graphical artifacts demonstrating model behaviors and performance. Depending on whether truth ages were provided, this will show a truth vs prediction scatterplot, a histogram, or both if age data are partially provided. Color values will indicate splits if in training or fine tuning mode, or dataset name if in inference mode.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_complete_stats.png" class="img-fluid figure-img"></p>
+<figcaption>Stats and graphical artifacts</figcaption>
+</figure>
+</div>
+<p>While also mentioned as a live feedback source while running models, the completed training loss curve is available in the top right. Note that all embedded visualizations have built in features such as allowing zooming, hovering points for more precise values, and saving views as an image directly.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_complete_loss_curve.png" class="img-fluid figure-img"></p>
+<figcaption>Training loss artifact</figcaption>
+</figure>
+</div>
+<p>On the left are the parameters used for the completed run. There are also two fields where you can add some descriptive information on the run: a name and a description, which are metadata which are attached to exported objects once provided.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_complete_configuration.png" class="img-fluid figure-img"></p>
+<figcaption>Model run configuration</figcaption>
+</figure>
+</div>
+<p>On the right are a few options to export model results. The download results button downloads run outputs (model objects, age predictions, metadata, etc), and the upload trianed model (only available after training or fine-tuning) allows for you to upload a model so it is available for subsequent inference or fine-tuning by any lab users. After upload, it will be immediately available for further workflows using that trained model.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/run_complete_outputs.png" class="img-fluid figure-img"></p>
+<figcaption>Outputs</figcaption>
 </figure>
 </div>
 </details>
@@ -459,7 +487,7 @@ ul.task-list li input[type="checkbox"] {
 </summary>
 <p>There are two different different philosophies to provide data to the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use.</p>
 <p>Additionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however, allow you to select which columns you’d like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data.</p>
-<p>The app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns.</p>
+<p>The app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns (***NOTE to self: this is a good QoL feature: temporary datasets.).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/id_nonunique.png" class="img-fluid figure-img"></p>
@@ -474,15 +502,33 @@ ul.task-list li input[type="checkbox"] {
 <p>To upload data into the app, use the upload button in the top left.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
+<p><img src="../content/images/app_screenshot_data_zoom.png" class="img-fluid figure-img"></p>
 <figcaption>Data browsing and upload section of the app</figcaption>
 </figure>
 </div>
 </details>
 </section>
-<section id="mode-models-and-approaches" class="level3">
-<h3 class="anchored" data-anchor-id="mode-models-and-approaches">Mode, models, and approaches</h3>
-<p>The ML codebase contains better features for inputing models not generated through the application. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible model format. For inputting models generated through the application, simple path to the output .keras.zip file downloaded from a previous training event.</p>
+<section id="detailed-section-by-section" class="level3">
+<h3 class="anchored" data-anchor-id="detailed-section-by-section">Detailed section by section</h3>
+<details>
+<summary>
+<font size="4">Select Datasets </font>
+</summary>
+<p>This section allows you to select from previously uploaded data and upload new datasets. Any .csv file will be accepted, and the app will attempt to use certain columns based on exact matches to naming convention. Depending on the mode, the purpose of the dataset will be variable. For most downstream operations, datasets are used as a vertically concatenated (think ‘rbind’ in R) combination of all the selected datasets. Output data will use names and unique hashes of these component datasets for record keeping and more detailed breadowns outside of the app.</p>
+<p>See next section for how these selected datasets are used for the different modes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_data_zoom.png" class="img-fluid figure-img"></p>
+<figcaption>Data browsing and upload section of the app</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+<font size="4">Select Mode</font>
+</summary>
+<p>ML models that fit the application native format can be directly uploaded. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible application model format. For inputting models generated through the application, simply path to the output .keras.zip file downloaded from a previous training event.</p>
+<p>The datasets you have selected will function differently depending on what mode you select:</p>
 <ul>
 <li>If ‘training’ is selected, the selected dataset(s) will function as training data.</li>
 <li>If ‘inference’ is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of ‘age’ if available, otherwise will report histogram of output ages)</li>
@@ -490,10 +536,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <details>
 <summary>
-<font size="4">Training mode</font>
+<font size="4">Training Mode</font>
 </summary>
 <p>The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique (“approach”). The “basic model” approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is ‘tuned’ to optimize performance over a sequence of optimization rounds.</p>
-<p>These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach so they don’t have to be hardcoded into the app, as the app will generate them based on the information provided.</p>
+<p>These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach, which allows the app to provide them in a more streamlined way (no code development required).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
@@ -513,9 +559,34 @@ ul.task-list li input[type="checkbox"] {
 </summary>
 <p>The fine-tuning mode is used when a previously trained model exists, and you wish to retain some information from the previous weights while ‘fine-tuning’ it on another dataset. This is an operation that takes some nuance, especially considering the shallow depth of most of these models which make it very easy to discard existing weights if number of training epochs and learning rate (<strong><em>NOTE to self: is this even in here? Add??</em></strong>) is not chosen carefully.</p>
 </details>
-</section>
-<section id="data-columns" class="level3">
-<h3 class="anchored" data-anchor-id="data-columns">Data Columns</h3>
+</details>
+<details>
+<summary>
+<font size="4">Data Columns</font>
+</summary>
+<p>The data columns pane is responsive to both:</p>
+<ul>
+<li>The column names in the selected datsets, and</li>
+<li>The mode selected</li>
+</ul>
+<p>The data pane will display the following information:</p>
+<ol type="1">
+<li>Wav numbers and spectrography attributes for each different dataset, as well as if they are ‘valid’ (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)</li>
+<li>Whether columns match known reserved names (id, split, age), Standard Column names, or other.</li>
+<li>The number of datasets where the particular column is included.</li>
+<li>Any special treatment of that particular column. This can include:
+<ul>
+<li>treated as a reserved column name (unselectable- automatically used)</li>
+<li>one hot encoding was applied (default for standard columns marked as ‘categorical’ type)</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/data_columns_lots_o_details.png" class="img-fluid figure-img"></p>
+<figcaption>Information in Data Columns</figcaption>
+</figure>
+</div>
+</details>
 
 
 </section>

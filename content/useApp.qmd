@@ -204,7 +204,7 @@ The datasets you have selected will function differently depending on what mode 
 
 <details>
 
-<summary><font size = "4">Training Mode</font></summary>
+<summary>Training Mode</summary>
 
 The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique ("approach"). The "basic model" approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is 'tuned' to optimize performance over a sequence of optimization rounds. 
 
@@ -216,17 +216,23 @@ These approaches are defined in the ML codebase, and must be encorporated into t
 
 <details>
 
-<summary><font size = "4">Inference mode</font></summary>
+<summary>Inference mode</summary>
 
 The inference mode is used when a previously trained model exists, and you wish to apply it to a different dataset. The inference mode will take this chosen model and attempt, if compatible, to apply it to the user selected training data (indicated in the data selection pan in the top left). Note that the application will aggressively attempt to make datasets compatible, so pay attention to any information provided in the model metadata as well as in the data pane. Datasets run for inference can include the response column. If the response column is provided, R2 scores will be provided, if not, a histogram of ages with be provided, and if ages are partially known, both will be provided. 
+
+When a trained model is selected, the app will display any available metadata. This can help assess compatibility with different datasets. This also includes metadata on any description given to the model (good practice is to discuss the training data used), as well as other information relevant for fine-tuning. 
+
+![Model metadata, inference](/content/images/app_screenshot_mode_inference.png)
 
 </details>
 
 <details>
 
-<summary><font size = "4">Fine-tuning mode</font></summary>
+<summary>Fine-tuning mode</summary>
 
 The fine-tuning mode is used when a previously trained model exists, and you wish to retain some information from the previous weights while 'fine-tuning' it on another dataset. This is an operation that takes some nuance, especially considering the shallow depth of most of these models which make it very easy to discard existing weights if number of training epochs and learning rate (***NOTE to self: is this even in here? Add??***) is not chosen carefully. 
+
+The model metadata contains information relevant for fine-tuning, including the max_bio_columns, which is relevant for fine-tuning as it represents the total amount of non-wavenumber columns supported by the model archetecture for further fine-tuning. If the number of non-wavenumber columns exceeds this value, further retraining will not be possible. 
 
 </details>
 
@@ -243,14 +249,47 @@ The data columns pane is responsive to both:
 
 The data pane will display the following information: 
 
-1. Wav numbers and spectrography attributes for each different dataset, as well as if they are 'valid' (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)
-2. Whether columns match known reserved names (id, split, age), Standard Column names, or other. 
-3. The number of datasets where the particular column is included.
-4. Any special treatment of that particular column. This can include: 
+1. Whether a given data column is selectable (optional) for the particular mode. Columns that are not selectable will generally say why.  
+2. Wav numbers and spectrography attributes for each different dataset, as well as if they are 'valid' (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)
+3. Whether columns match known reserved names (id, split, age), Standard Column names, or other. 
+4. The number of datasets where the particular column is included.
+5. Any special treatment of that particular column. This can include: 
     * treated as a reserved column name (unselectable- automatically used)
     * one hot encoding was applied (default for standard columns marked as 'categorical' type)
+    * information on whether or not columns present in a selected model archetecture are present in provided datasets. 
 
 ![Information in Data Columns](/content/images/data_columns_lots_o_details.png)
+
+<details>
+
+<summary>Training Mode</summary>
+
+The data pane will provide the above information, and should be fairly self explanatory. Data that are unselected will not be used to train the model. You may choose to unselect or retain partial matches between the different selected datasetes. Sometimes, it may help to remove partial matches for more consistent model performance between different datasets, whereas conversely it may help optimize for performance to leave certain partially available columns in. 
+
+![Examples of information feedback from Data Pane from selections; training mode](/content/images/training_data_pane.png)
+
+</details>
+
+<details>
+
+<summary>Inference Mode</summary>
+
+When a trained model is selected, and there are differences between the data columns used to train the model and the data columns available in the selected dataset, the application will unselect the data columns as an option without options to reselect, and state why. This could be either that: 
+
+* the column is **included in pretrained model** (but absent from dataset) 
+* the column is **not used in pretrained model** (but present in dataset) 
+
+For data columns that are present in both the dataset(s) and pretrained model, it will be optional to include them. When the data are fully available, you would usually elect to include available data that match the trained model. In cases where the selected datasets partially match, you may prefer to remove a partially available column to allow for more equal treament by the model among the datasets. You can also choose to unselect certain data for experimental reasons (to simulate the effect of a potentially absent data column in the future). 
+
+![Examples of information feedback from Data Pane from selections; inference mode](/content/images/inference_mode_data_pane.png)
+
+</details>
+
+<details>
+
+<summary>Fine-tuning Mode</summary>
+
+![Examples of information feedback from Data Pane from selections; fine-tuning mode](/content/images/fine_tuning_data_pane.png)
 
 
 </details>

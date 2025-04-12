@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4379b0ccadffce622b03caf4c46266b3.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e4d3cb51edf2c14782895a859c931f1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4e97092e5dc1d2ff05b2367cd0606e1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-0045eb1c33f61f19c2496553aa0e9380.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -536,7 +536,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <details>
 <summary>
-<font size="4">Training Mode</font>
+Training Mode
 </summary>
 <p>The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique (“approach”). The “basic model” approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is ‘tuned’ to optimize performance over a sequence of optimization rounds.</p>
 <p>These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach, which allows the app to provide them in a more streamlined way (no code development required).</p>
@@ -549,15 +549,23 @@ ul.task-list li input[type="checkbox"] {
 </details>
 <details>
 <summary>
-<font size="4">Inference mode</font>
+Inference mode
 </summary>
 <p>The inference mode is used when a previously trained model exists, and you wish to apply it to a different dataset. The inference mode will take this chosen model and attempt, if compatible, to apply it to the user selected training data (indicated in the data selection pan in the top left). Note that the application will aggressively attempt to make datasets compatible, so pay attention to any information provided in the model metadata as well as in the data pane. Datasets run for inference can include the response column. If the response column is provided, R2 scores will be provided, if not, a histogram of ages with be provided, and if ages are partially known, both will be provided.</p>
+<p>When a trained model is selected, the app will display any available metadata. This can help assess compatibility with different datasets. This also includes metadata on any description given to the model (good practice is to discuss the training data used), as well as other information relevant for fine-tuning.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_mode_inference.png" class="img-fluid figure-img"></p>
+<figcaption>Model metadata, inference</figcaption>
+</figure>
+</div>
 </details>
 <details>
 <summary>
-<font size="4">Fine-tuning mode</font>
+Fine-tuning mode
 </summary>
 <p>The fine-tuning mode is used when a previously trained model exists, and you wish to retain some information from the previous weights while ‘fine-tuning’ it on another dataset. This is an operation that takes some nuance, especially considering the shallow depth of most of these models which make it very easy to discard existing weights if number of training epochs and learning rate (<strong><em>NOTE to self: is this even in here? Add??</em></strong>) is not chosen carefully.</p>
+<p>The model metadata contains information relevant for fine-tuning, including the max_bio_columns, which is relevant for fine-tuning as it represents the total amount of non-wavenumber columns supported by the model archetecture for further fine-tuning. If the number of non-wavenumber columns exceeds this value, further retraining will not be possible.</p>
 </details>
 </details>
 <details>
@@ -571,6 +579,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>The data pane will display the following information:</p>
 <ol type="1">
+<li>Whether a given data column is selectable (optional) for the particular mode. Columns that are not selectable will generally say why.<br>
+</li>
 <li>Wav numbers and spectrography attributes for each different dataset, as well as if they are ‘valid’ (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)</li>
 <li>Whether columns match known reserved names (id, split, age), Standard Column names, or other.</li>
 <li>The number of datasets where the particular column is included.</li>
@@ -578,6 +588,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>treated as a reserved column name (unselectable- automatically used)</li>
 <li>one hot encoding was applied (default for standard columns marked as ‘categorical’ type)</li>
+<li>information on whether or not columns present in a selected model archetecture are present in provided datasets.</li>
 </ul></li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
@@ -586,10 +597,49 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Information in Data Columns</figcaption>
 </figure>
 </div>
+<details>
+<summary>
+Training Mode
+</summary>
+<p>The data pane will provide the above information, and should be fairly self explanatory. Data that are unselected will not be used to train the model. You may choose to unselect or retain partial matches between the different selected datasetes. Sometimes, it may help to remove partial matches for more consistent model performance between different datasets, whereas conversely it may help optimize for performance to leave certain partially available columns in.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/training_data_pane.png" class="img-fluid figure-img"></p>
+<figcaption>Examples of information feedback from Data Pane from selections; training mode</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+Inference Mode
+</summary>
+<p>When a trained model is selected, and there are differences between the data columns used to train the model and the data columns available in the selected dataset, the application will unselect the data columns as an option without options to reselect, and state why. This could be either that:</p>
+<ul>
+<li>the column is <strong>included in pretrained model</strong> (but absent from dataset)</li>
+<li>the column is <strong>not used in pretrained model</strong> (but present in dataset)</li>
+</ul>
+<p>For data columns that are present in both the dataset(s) and pretrained model, it will be optional to include them. When the data are fully available, you would usually elect to include available data that match the trained model. In cases where the selected datasets partially match, you may prefer to remove a partially available column to allow for more equal treament by the model among the datasets. You can also choose to unselect certain data for experimental reasons (to simulate the effect of a potentially absent data column in the future).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/inference_mode_data_pane.png" class="img-fluid figure-img"></p>
+<figcaption>Examples of information feedback from Data Pane from selections; inference mode</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+Fine-tuning Mode
+</summary>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/fine_tuning_data_pane.png" class="img-fluid figure-img"></p>
+<figcaption>Examples of information feedback from Data Pane from selections; fine-tuning mode</figcaption>
+</figure>
+</div>
 </details>
 
 
-</section>
+</details></section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

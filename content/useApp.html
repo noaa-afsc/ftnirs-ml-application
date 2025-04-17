@@ -472,7 +472,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>In addition to these specific values, there is also a registry of ‘standard variables’, which help combine like data between different groups and also contain information about the type of data which help for how the application treats these data types. Here is an example of how these are defined:</p>
 <p>STANDARD_COLUMN_NAMES = {IDNAME:{‘data_type’:‘unq_text’}, SPLITNAME:{‘data_type’:‘int’}, ‘catch_year’ : {‘data_type’:‘int’}, ‘catch_month’: {‘data_type’: ‘int’}, ‘catch_day’: {‘data_type’: ‘int’}, ‘sex’ : {‘data_type’:‘categorical’}, RESPONSENAME : {‘data_type’:‘numeric’}, ‘latitude’ : {‘data_type’:‘numeric’}, ‘longitude’ : {‘data_type’:‘numeric’}, ‘region’: {‘data_type’: ‘categorical’}, ‘fish_length’: {‘data_type’: ‘numeric’}, ‘fish_weight’: {‘data_type’: ‘numeric’}, ‘otolith_weight’: {‘data_type’: ‘numeric’}, ‘gear_depth’: {‘data_type’: ‘numeric’}, ‘gear_temp’: {‘data_type’: ‘numeric’} }</p>
-<p>In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (<strong><em>note to self, this is a good back end improvement, define UNITS </em></strong>)</p>
+<p>In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (<strong><em>note to self, this is a good back end improvement, define UNITS in this structure</em></strong>)</p>
+<p>***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a ‘one-hot-encoded’ column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the [“constants”] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/standard_columns.png" class="img-fluid figure-img"></p>
@@ -618,7 +619,7 @@ Inference Mode
 <li>the column is <strong>included in pretrained model</strong> (but absent from dataset)</li>
 <li>the column is <strong>not used in pretrained model</strong> (but present in dataset)</li>
 </ul>
-<p>For data columns that are present in both the dataset(s) and pretrained model, it will be optional to include them. When the data are fully available, you would usually elect to include available data that match the trained model. In cases where the selected datasets partially match, you may prefer to remove a partially available column to allow for more equal treament by the model among the datasets. You can also choose to unselect certain data for experimental reasons (to simulate the effect of a potentially absent data column in the future).</p>
+<p>For data columns that are present in both the dataset(s) and pretrained model, it will be optional to include them. When the data are fully available, you would usually elect to include available data that match the trained model. In cases where the selected datasets partially match what the model has available, you may prefer to remove a partially available column to allow for more equal treament by the model among the datasets. You can also choose to unselect certain data for experimental reasons (for example, to simulate the effect of a potentially absent data column in the future).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/inference_mode_data_pane.png" class="img-fluid figure-img"></p>
@@ -630,6 +631,7 @@ Inference Mode
 <summary>
 Fine-tuning Mode
 </summary>
+<p>For the fine-tuning mode, the Data Column section is a mix of the behaviors of training and inference. The model archetectures on first training are hardcoded (<strong><em>NOTE: for now</em></strong>) to provide a maximum of 100 biological/geospatial/temporal features for future trainings, allowing the same weights to be preserved while being flexible to dynamic data availability. This means that datasets that are now available for retraining will be possible to include even if not present in the original model. The Data Column pane will flag standard columns which, like in inference, are either present on the model archetecture and absent in the data (<strong>included in pretrained model</strong>), but will also provide this message when columns in the dataset are included in the pretrained model to help distinguish and clarify decisions when it comes to choosing to include/exlude new data or data already present in the model during retraining.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/fine_tuning_data_pane.png" class="img-fluid figure-img"></p>
@@ -637,6 +639,13 @@ Fine-tuning Mode
 </figure>
 </div>
 </details>
+<p>Both inference and fine-tuning will flag if a column was NULLIFIED in the last training event, meaning, the biological/geospatial/temporal data was named and included some point in the model training, but in the latest round was given a dummy value to deprioritize it for retraining. These can be added back in as desired for fine-tuning, but consume a column for further retraining. For inference, a column currently nullified shouldn’t be used except for experimental reasons, and care should be taken when reintroducing it with fine-tuning.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/nullified.png" class="img-fluid figure-img"></p>
+<figcaption>Data Pane showing columns that were nullifed in last retraining</figcaption>
+</figure>
+</div>
 
 
 </details></section>

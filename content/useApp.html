@@ -540,7 +540,7 @@ ul.task-list li input[type="checkbox"] {
 Training Mode
 </summary>
 <p>The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique (“approach”). The “basic model” approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is ‘tuned’ to optimize performance over a sequence of optimization rounds.</p>
-<p>These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward, and in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> file within the ML codebase a data structure exists (TRAINING APPROACHES) to define particular parameters related to that approach, which allows the app to provide them in a more streamlined way (no code development required).</p>
+<p>These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
@@ -639,16 +639,74 @@ Fine-tuning Mode
 </figure>
 </div>
 </details>
-<p>Both inference and fine-tuning will flag if a column was NULLIFIED in the last training event, meaning, the biological/geospatial/temporal data was named and included some point in the model training, but in the latest round was given a dummy value to deprioritize it for retraining. These can be added back in as desired for fine-tuning, but consume a column for further retraining. For inference, a column currently nullified shouldn’t be used except for experimental reasons, and care should be taken when reintroducing it with fine-tuning.</p>
+<p>Both inference and fine-tuning will flag if a column was NULLIFIED in the last training event, meaning, the biological/geospatial/temporal data was named and included some point in the model training, but in the latest round was given a dummy value to deprioritize it for retraining. For inference, a column currently nullified shouldn’t be used except for experimental reasons. NULLIFIED columns can be added back in as desired for fine-tuning, but care should be taken when reintroducing it as performance impacts can be unpredictable.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/nullified.png" class="img-fluid figure-img"></p>
 <figcaption>Data Pane showing columns that were nullifed in last retraining</figcaption>
 </figure>
 </div>
+</details>
+<details>
+<summary>
+<font size="4">Select Parameters</font>
+</summary>
+<p>The Select Parameters section allows you to define relevant parameters for the model run event. This is broken down into three component sections: signal processing parameters, mode parameters, and approach parameters. Some number of these are applicable for each mode, and the way each component section is interfaced with changes depending on the selected mode.</p>
+<details>
+<summary>
+Signal processing parameters
+</summary>
+<p>This section is where signal processing algorithms are selected. These can only be changed in a new training event.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/parameters_signal_processing1.png" class="img-fluid figure-img"></p>
+<figcaption>Signal processing options during training</figcaption>
+</figure>
+</div>
+<p>Interpolation can be set to custom bounds to promote interoperability in future use, otherwise it will default to the minimum and maximum values present in the training dataset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/parameters_signal_processing2.png" class="img-fluid figure-img"></p>
+<figcaption>Signal processing options during training; custom interpoloation</figcaption>
+</figure>
+</div>
+<p>During inference or retraining, this section shows the preset parameters which will be applied to the model run but are unchangeable. If the wav numbers have different attributes (start, end, step), 1d interpolation will be applied to attempt to make the signal compatible.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/parameters_signal_processing3.png" class="img-fluid figure-img"></p>
+<figcaption>Fixed signal processing choices for inference and retraining</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+Mode parameters
+</summary>
+<p>Mode parameters are generic to a specific mode: training, inference, or fine-tuning. Training options include a seed (to help ensure reproduceable initial random weights), custom defined splits, number of epochs, and early stopping parameters (<strong>note that manual early stopping is not currently supported</strong>).</p>
+<p>Currently, there are no parameters specific to inference.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/parameters_signal_mode_training.png" class="img-fluid figure-img"></p>
+<figcaption>Parameters for training/fine-tuning modes</figcaption>
+</figure>
+</div>
+</details>
+<details>
+<summary>
+Approach parameters
+</summary>
+<p>Mode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> file within the ML codebase)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/parameters_signal_approach.png" class="img-fluid figure-img"></p>
+<figcaption>Parameters for training/fine tuning approaches</figcaption>
+</figure>
+</div>
+</details>
+</details>
 
 
-</details></section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

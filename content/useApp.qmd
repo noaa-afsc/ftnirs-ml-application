@@ -148,7 +148,7 @@ In the above, declaring categorical variables will allow for instance the applic
 
 ![Application interpretation of a dataset based on names of columns in dataset](/content/images/standard_columns.png)
 
-For some examples of properly formatted data, you can refer to sample [datasets](https://github.com/noaa-afsc/ftnirs-ml-codebase/tree/main/tests/Data) in the tests folder of the ML codebase
+For some examples of properly formatted data, you can refer to sample [datasets](https://github.com/noaa-afsc/ftnirs-ml-codebase/tree/main/tests/Data) in the tests folder of the ML codebase.
 
 </details>
 
@@ -351,4 +351,36 @@ Mode parameters are generic to a specific training approach. Approaches are mean
 </details>
 
 </details>
+
+<details>
+
+<summary><font size = "4">Stats and graphical artifacts</font></summary>
+
+After a model run event, some performance feedback will be provided back in form of stats and graphical artifacts. What you get varies on a few conditions: 
+
+Training/fine tuning: you will get back performance stats grouped down by split. The performance stats will include n, r2, loss, mse (mean square error) and mae (mean average error). Generally r2 is your most informative feedback, and differences in r2 between the different splits can be used to quickly assess whether underfitting or overfitting has taken place (along with the training graph to the right of the run button). These modes will always produce a scatterplot of true age values vs. predicted values, allowing for more detailed information on performance bias and variance across the age range.
+
+![Training/fine-tuning, by split](/content/images/app_screenshot_training_stats.png)
+
+Inference: If truth ages are provided when inference is run, inference will produce performance stats just like in training/fine-tuning. the data will now be grouped by component dataset, as split is not used during inference. (***NOTE to self: should probably have stats breakdown at dataset level as well in this case?***)
+
+![Inference, with truth ages](/content/images/app_screenshot_inf_truth_ages.png.png)
+
+If not, it will produce a histogram of ages (***NOTE to self: in unaged case, should probably still be grouped by dataset?***). 
+
+![Inference, no truth ages](/content/images/app_screenshot_predicted_ages.png)
+
+If you have some ages provided and some ages missing in your training dataset, you will get both graphics. 
+
+![Inference, mixed availability of ages](/content/images/app_screenshot_inf_truth_ages_some_missing.png)
+
+**Graphical outputs need to be downloaded individually as needed: they are not retained in the bundle of downloaded artifacts, although the information is there to recreate them as needed**. Click in the top right option on any interactive figure to download it. 
+
+![Interactive figure with download option](/content/images/app_screenshot_figure_save.png)
+
+Statistical outputs are available as part of the standard downloaded results. All figures and stats can be recreated with downloaded datasets. 
+
+</details>
+
+
 

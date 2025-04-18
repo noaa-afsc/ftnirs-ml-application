@@ -480,7 +480,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Application interpretation of a dataset based on names of columns in dataset</figcaption>
 </figure>
 </div>
-<p>For some examples of properly formatted data, you can refer to sample <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/tree/main/tests/Data">datasets</a> in the tests folder of the ML codebase</p>
+<p>For some examples of properly formatted data, you can refer to sample <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/tree/main/tests/Data">datasets</a> in the tests folder of the ML codebase.</p>
 </details>
 <details>
 <summary>
@@ -703,6 +703,48 @@ Approach parameters
 </figure>
 </div>
 </details>
+</details>
+<details>
+<summary>
+<font size="4">Stats and graphical artifacts</font>
+</summary>
+<p>After a model run event, some performance feedback will be provided back in form of stats and graphical artifacts. What you get varies on a few conditions:</p>
+<p>Training/fine tuning: you will get back performance stats grouped down by split. The performance stats will include n, r2, loss, mse (mean square error) and mae (mean average error). Generally r2 is your most informative feedback, and differences in r2 between the different splits can be used to quickly assess whether underfitting or overfitting has taken place (along with the training graph to the right of the run button). These modes will always produce a scatterplot of true age values vs.&nbsp;predicted values, allowing for more detailed information on performance bias and variance across the age range.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_training_stats.png" class="img-fluid figure-img"></p>
+<figcaption>Training/fine-tuning, by split</figcaption>
+</figure>
+</div>
+<p>Inference: If truth ages are provided when inference is run, inference will produce performance stats just like in training/fine-tuning. the data will now be grouped by component dataset, as split is not used during inference. (<strong><em>NOTE to self: should probably have stats breakdown at dataset level as well in this case?</em></strong>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_inf_truth_ages.png.png" class="img-fluid figure-img"></p>
+<figcaption>Inference, with truth ages</figcaption>
+</figure>
+</div>
+<p>If not, it will produce a histogram of ages (<strong><em>NOTE to self: in unaged case, should probably still be grouped by dataset?</em></strong>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_predicted_ages.png" class="img-fluid figure-img"></p>
+<figcaption>Inference, no truth ages</figcaption>
+</figure>
+</div>
+<p>If you have some ages provided and some ages missing in your training dataset, you will get both graphics.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_inf_truth_ages_some_missing.png" class="img-fluid figure-img"></p>
+<figcaption>Inference, mixed availability of ages</figcaption>
+</figure>
+</div>
+<p><strong>Graphical outputs need to be downloaded individually as needed: they are not retained in the bundle of downloaded artifacts, although the information is there to recreate them as needed</strong>. Click in the top right option on any interactive figure to download it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../content/images/app_screenshot_figure_save.png" class="img-fluid figure-img"></p>
+<figcaption>Interactive figure with download option</figcaption>
+</figure>
+</div>
+<p>Statistical outputs are available as part of the standard downloaded results. All figures and stats can be recreated with downloaded datasets.</p>
 </details>
 
 

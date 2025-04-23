@@ -26,8 +26,7 @@ Once the module is installed in your virtual environment, you can import it like
 
 ![Codebase modules](/content/images/codebase-package.png)
 
-```{python}
-#| eval: false
+```{.python eval=false}
 
 from ftnirsml.code import *
 

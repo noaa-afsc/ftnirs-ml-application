@@ -393,13 +393,17 @@ When you download the data, it will save a bundle of file within a tar.gz format
 
 ![Downloaded data and results](/content/images/file_download.png)
 
+![Contents](/content/images/outputs_unpacked.png)
 
 You can use a tool like winzip or 7zip to unpack it locally as a directory. The included files are: 
 
-- stats.csv: the model run stats
-- [model_name].keras.zip: this is the model object with bundled metadata which is interoperable withe the apcation and ML codebase. The [model_name].keras.zip object can be further unpacked to extract the keras model and metadata, but the .zip file itself is used by both of these tools. (see more information on working with this format in the ML codebase section ***LINK***). This will match the name indicated in the app, if provided. 
-- ml_formatted_data_plus_untransformed_ages.csv: this is a dataset which includes the data as formatted prior to the model run event. It also includes untransformed ages. This allows you to understand the actual dataset that the model was trained on (includes formatting / post processing like, one hot encoding, applied scalers, interpolation, etc). This table also contains hashes to uniquely identify different component datasets, to allow for tracking assumptions of data used over time. 
+- stats.csv: the model run stats.
+- [model_name].keras.zip: this is the model object with bundled metadata which is interoperable withe the apcation and ML codebase. The [model_name].keras.zip object can be further unpacked to extract the keras model and metadata, but the .zip file itself is used by both of these tools as the standard formatted model object. (see more information on working with this format in the ML codebase section ***LINK***). This will match the name provided by you in the app, if provided, otherwise it will be 'unnamed.keras.zip'. 
+- ml_formatted_data_plus_untransformed_ages.csv: this is a dataset which includes the data as formatted prior to the model run event. It also includes untransformed ages. This allows you to understand the actual dataset that the model was trained on (includes formatting / post processing like, one hot encoding, applied scalers, interpolation, etc). This table also contains hashes to uniquely identify different component datasets, to allow for tracking assumptions of data used over time. This is the primary data object that should allow you to better understand the model behavior via the formatted dataset, do more sophisticated analysis of prediction performance downstream, and troubleshoot unexpected or undesireable behaviors. 
 - config.yml: this contains parameter selections for the model run event.
+
+![Output dataset for downstream analysis](/content/images/dataset_output_ex.png)
+
 
 
 

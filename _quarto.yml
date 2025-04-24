@@ -32,7 +32,6 @@ website:
         href: https://github.com/noaa-afsc/ftnirs-ml-application
         text: "Site repository"
 
-
     style: "docked"
     search: true
     collapse-level: 1
@@ -93,6 +92,8 @@ format:
     code-copy: true
     code-overflow: wrap
     toc: true
+    margin-header: |
+      [![NOAA internal app link](images/fishy.jpg){width=100%}](https://10.27.25.171/ftnirs_mlapp/)
 
 
 filters:

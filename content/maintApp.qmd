@@ -1,5 +1,33 @@
 ---
-title: Test page
+title: App data and models
 ---
 
-contents
+The application stores data and models in GCP storage buckets that are seperately managed. These need to be curated and keep the amount of data and models manageable. 
+In the future, when the concept of differently permissioned users is introduced into the app, we hope to integrate features to improve the ability for individual users to manage the data and models they have access to within the app.
+
+![Application data bucket](/content/images/bucket_toplevel.png){width=65%}
+
+![Application data bucket; datasets](/content/images/Application_bucket_data.png){width=65%}
+
+Users need to be given a permission by site admins to allow for them to curate data and models. Some coordination will be needed to determine: 
+
+1. What datasets should be temporary? 
+2. When are datasets no longer useful or have been succeeded by a different dataset?
+3. Is a given model for repeated use, or is it a one off from a shorter lived experiment? 
+
+There are some possible strategies that potentially can make management of data and models easier: 
+
+* **Assume all application data is temporary**: If the data and models stored in the application state are to be considered non-essential resources (meaning- the datasets and models are frequently backed up and stored/versioned outside of the app), more users can be extended permissions to delete their data and models and this can allow for safer self-managed curation of data and models. 
+* **Use naming conventions for data and/or models**: Some simple naming conventions could help flag to users responsible for curating the application state whether or not certain objects are safe to delete. Examples could be: 
+  - _temp: means that this file can always be safely deleted
+  - _prod: means that the dataset or model may be part of a production workflow, and should not be deleted
+  - _experiment[X]: giving a certain categorization to different datasets/models could help admins treat objects at a group level when making decisions of whether to persist or delete. 
+
+Other notes:
+
+- Introducing a feature to allow for application 'temp' files that are automatically flushed on a short time schedule (1 day or so) may be a good improvement to lower the burden and coordination of file management.  
+- If the app is self hosted, distinct bucket locations can be used to make managing the global state of data and models more feasible.  
+
+
+
+

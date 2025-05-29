@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>App data and models – ftnirs-ml-application Home</title>
+<title>Test page – ftnirs-ml-application Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,8 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../content/selfHost.html" rel="next">
-<link href="../content/Maintaining.html" rel="prev">
+<link href="../content/dataPrep.html" rel="next">
+<link href="../content/useCodebase.html" rel="prev">
 <link href="../images/fishy.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -248,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/Maintaining.html">Maintaining</a></li><li class="breadcrumb-item"><a href="../content/maintApp.html">App data and models</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/ExampleWorkflows.html">Example Workflows</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -333,13 +333,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../content/ExampleWorkflows.html" class="sidebar-item-text sidebar-link">
+            <a href="../content/ExampleWorkflows.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Example Workflows</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/dataPrep.html" class="sidebar-item-text sidebar-link">
@@ -399,14 +399,14 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../content/Maintaining.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Maintaining</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/maintApp.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/maintApp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">App data and models</span></a>
   </div>
 </li>
@@ -449,9 +449,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/Maintaining.html">Maintaining</a></li><li class="breadcrumb-item"><a href="../content/maintApp.html">App data and models</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">App data and models</h1>
+<h1 class="title">Test page</h1>
 </div>
 
 
@@ -468,41 +468,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The application stores data and models in GCP storage buckets that are seperately managed. These need to be curated and keep the amount of data and models manageable. In the future, when the concept of differently permissioned users is introduced into the app, we hope to integrate features to improve the ability for individual users to manage the data and models they have access to within the app.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../content/images/bucket_toplevel.png" class="img-fluid figure-img" style="width:65.0%"></p>
-<figcaption>Application data bucket</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../content/images/Application_bucket_data.png" class="img-fluid figure-img" style="width:65.0%"></p>
-<figcaption>Application data bucket; datasets</figcaption>
-</figure>
-</div>
-<p>Users need to be given a permission by site admins to allow for them to curate data and models. Some coordination will be needed to determine:</p>
-<ol type="1">
-<li>What datasets should be temporary?</li>
-<li>When are datasets no longer useful or have been succeeded by a different dataset?</li>
-<li>Is a given model for repeated use, or is it a one off from a shorter lived experiment?</li>
-</ol>
-<p>There are some possible strategies that potentially can make management of data and models easier:</p>
-<ul>
-<li><strong>Assume all application data is temporary</strong>: If the data and models stored in the application state are to be considered non-essential resources (meaning- the datasets and models are frequently backed up and stored/versioned outside of the app), more users can be extended permissions to delete their data and models and this can allow for safer self-managed curation of data and models.</li>
-<li><strong>Use naming conventions for data and/or models</strong>: Some simple naming conventions could help flag to users responsible for curating the application state whether or not certain objects are safe to delete. Examples could be:
-<ul>
-<li>_temp: means that this file can always be safely deleted</li>
-<li>_prod: means that the dataset or model may be part of a production workflow, and should not be deleted</li>
-<li>_experiment[X]: giving a certain categorization to different datasets/models could help admins treat objects at a group level when making decisions of whether to persist or delete.</li>
-</ul></li>
-</ul>
-<p>Other notes:</p>
-<ul>
-<li>Introducing a feature to allow for application ‘temp’ files that are automatically flushed on a short time schedule (1 day or so) may be a good improvement to lower the burden and coordination of file management.<br>
-</li>
-<li>If the app is self hosted, distinct bucket locations can be used to make managing the global state of data and models more feasible.</li>
-</ul>
+<p>contents</p>
 
 
 
@@ -921,13 +887,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../content/Maintaining.html" class="pagination-link" aria-label="Maintaining">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Maintaining</span>
+      <a href="../content/useCodebase.html" class="pagination-link" aria-label="The codebase">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">The codebase</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../content/selfHost.html" class="pagination-link" aria-label="Self-hosting">
-        <span class="nav-page-text">Self-hosting</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../content/dataPrep.html" class="pagination-link" aria-label="Data preparation">
+        <span class="nav-page-text">Data preparation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -939,7 +905,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/maintApp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/maintApp.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/edit/main/content/ExampleWorkflows.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/blob/main/content/ExampleWorkflows.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/noaa-afsc/ftnirs-ml-application/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

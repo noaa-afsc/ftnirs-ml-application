@@ -1,107 +1,13 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Fourier transform near-infrared spectroscopy / machine learning otolith aging application",
+    "objectID": "content/useApp.html",
+    "href": "content/useApp.html",
+    "title": "Using the Application",
     "section": "",
-    "text": "The AFSC Age and Growth Program have pioneered machine learning methods to streamline specimen age predictions from otoliths. The approach is a multimodal convolutional neural network, (MM- CNN) as described in Benson et al. (2019), which encorporates two key data modalities: the entire range of wavenumbers of FT-NIR spectra, and corresponding biological and geospatial data.\nDuring development of this technique, scripts was developed in jupyter notebooks and demonstrated excellent performance in multiple species age prediction (cite). To bring these techniques to a wider audience, the code was refactored into functional programming. The core scripts were refactored into a functional programming codebase that encorporated ideas like data standards and the machine learning lifecycle to promote reuse and extention of the method across a broader range of data and machine learning techniques.\nThis codebase was developed in python, and currently supports the following features:\n\nFull machine learning lifecycle:\n\nTraining\nInference\nFine-tuning\n\nModel inference and fine-tuning will use the data given as best possible\n\nAutomatic interpolation of spectra as required\nNew data can be incorporated into fine tuning while preserving existing model weights\n\nBuilt in features for under-the-hood data formatting\n\nautomatic one hot encoding for known categorical variables\nawareness of standard variables to promote combining data where appropriate\n\n\nThe application serves to deliver the codebase core logic in an easy to use interface.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#abstract",
-    "href": "index.html#abstract",
-    "title": "Fourier transform near-infrared spectroscopy / machine learning otolith aging application",
-    "section": "",
-    "text": "The AFSC Age and Growth Program have pioneered machine learning methods to streamline specimen age predictions from otoliths. The approach is a multimodal convolutional neural network, (MM- CNN) as described in Benson et al. (2019), which encorporates two key data modalities: the entire range of wavenumbers of FT-NIR spectra, and corresponding biological and geospatial data.\nDuring development of this technique, scripts was developed in jupyter notebooks and demonstrated excellent performance in multiple species age prediction (cite). To bring these techniques to a wider audience, the code was refactored into functional programming. The core scripts were refactored into a functional programming codebase that encorporated ideas like data standards and the machine learning lifecycle to promote reuse and extention of the method across a broader range of data and machine learning techniques.\nThis codebase was developed in python, and currently supports the following features:\n\nFull machine learning lifecycle:\n\nTraining\nInference\nFine-tuning\n\nModel inference and fine-tuning will use the data given as best possible\n\nAutomatic interpolation of spectra as required\nNew data can be incorporated into fine tuning while preserving existing model weights\n\nBuilt in features for under-the-hood data formatting\n\nautomatic one hot encoding for known categorical variables\nawareness of standard variables to promote combining data where appropriate\n\n\nThe application serves to deliver the codebase core logic in an easy to use interface.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "content/Contributing.html",
-    "href": "content/Contributing.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Contributing"
-    ]
-  },
-  {
-    "objectID": "content/exCodebase.html",
-    "href": "content/exCodebase.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Examples",
-      "The codebase"
-    ]
-  },
-  {
-    "objectID": "content/contApp.html",
-    "href": "content/contApp.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Contributing",
-      "App features"
-    ]
-  },
-  {
-    "objectID": "content/backScience.html",
-    "href": "content/backScience.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Background",
-      "The science"
-    ]
-  },
-  {
-    "objectID": "content/Maintaining.html",
-    "href": "content/Maintaining.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Maintaining"
-    ]
-  },
-  {
-    "objectID": "content/useCodebase.html",
-    "href": "content/useCodebase.html",
-    "title": "Using the Codebase",
-    "section": "",
-    "text": "Installing\nThe codebase is a python package that contains the underlying ML logic of the application, and can be used freestanding of the application. It can be installed from github via pip. The following line could be placed in a requirements.txt file, or installed independently in a python or conda virtual environment.\npip install git+https://github.com/noaa-afsc/ftnirs-ml-codebase.git\nOr, to install a specific version:\n#set this to the version you want to download\nVERSION_TAG=v0.4.0\n\npip install git+https://github.com/noaa-afsc/ftnirs-ml-codebase.git@$VERSION_TAG\n\nOnce the module is installed in your virtual environment, you can import it like any other package. The relevant functions live in the “code” module, constants / global variables live in the “constants” module.\n\n\n\nCodebase modules\n\n\n\nfrom ftnirsml.code import *\n\nfrom ftnirsml.constants import WN_MATCH,INFORMATIONAL,RESPONSE_COLUMNS\n\n\nPython scripting with the codebase\nIf conducting more specific research or simulations, or designing potential new features for the codebase, different aspects of the codebase used selectively.\nThere is a general flow that the codebase natively supports:\n\nLoad in datasets with pandas\n(if inference or fine tuning) Load in model object (*.keras.zip) from app or previous training from codebase\nFormat data with format_data\nPerform model training, inference, or fine-tuning\nExport outputs and model artifacts.\n\nHere is an example for a model training workflow from a sample dataset\n\n\nTraining example\n\n\n\n\n\n\nInference example\n\n\n\n\n\n\nFine-tuning example",
+    "text": "The layout\n\n\nPreparing to run models\n\nThe app components are ordered to go left right / top to bottom, usually in the order you would modify them in a typical workflow.\nAt the very top, we have a few buttons. The first is a link to go to the home page (NOTE TO SELF, may deprecate if move to one page app), a link to the documentation (this website), and in the right we have the git versions and buttons with links to the git repos.\n\n\n\nNavigation\n\n\nIn the top left, we have the data upload / select pane. You can browse through existing datasets in the app or upload further datasets.\n\n\n\nData browsing and upload section of the app\n\n\nThe datasets will do different things depending on which ‘mode’ is selected.\n\n\n\nMode and approach section of the app\n\n\nTo the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices will result in different behaviors (see more details in Data Columns section)\n\n\n\nData Columns pane\n\n\nTo the right of that, you have options for parameterization. Within this pane, you can choose parameters for signal processing,\n\n\n\nParameters pane: signal processing\n\n\nparameters specific to the mode,\n\n\n\nParameters pane: mode general\n\n\nand parameters specific to the training/fine-tuning approach.\n\n\n\nParameters pane: approach\n\n\nOnce all of these sections have been considered, you can run the particular model event (will vary depending on mode) with the run button.\n\n\n\nRun button\n\n\n\n\n\nRunning models\n\nThe run button will execute the model run event based on the parameters provided in the aforementioned sections.\n\n\n\nRun button\n\n\nWhile the model is running, there is an intermediate app stage where you will be provided live information. The run button will display as a loading icon during training. Jobs cannot be canceled once started (NOTE: maybe can change if move to single page app?). To the left of the run button is logging information for the algorithm process.\n\n\n\nEvent logs\n\n\nTo the right is a live display of the training loss and validation loss, used to assess the appropriate degree of model fitting and help select a resonable training time or early stopping criterion.\n\n\n\nTraining loss curve\n\n\nWhile model training is ongoing, the numner of concurrent tensorflow jobs in the top bar will increment up by one. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention.\n\n\n\nConcurrent tensorflow jobs\n\n\nAny errors observed during model training will be displayed in the bottom left, accompanied by a banner error.\n\n\n\nErrors\n\n\n\n\n\nModel results\n\nIf the model run event has finished without errors, you can scroll down to see outputs relevant to the mode selected.\n\n\n\nCompleted run\n\n\nIn the center section are stats and graphical artifacts demonstrating model behaviors and performance. Depending on whether truth ages were provided, this will show a truth vs prediction scatterplot, a histogram, or both if age data are partially provided. Color values will indicate splits if in training or fine tuning mode, or dataset name if in inference mode.\n\n\n\nStats and graphical artifacts\n\n\nWhile also mentioned as a live feedback source while running models, the completed training loss curve is available in the top right. Note that all embedded visualizations have built in features such as allowing zooming, hovering points for more precise values, and saving views as an image directly.\n\n\n\nTraining loss artifact\n\n\nOn the left are the parameters used for the completed run. There are also two fields where you can add some descriptive information on the run: a name and a description, which are metadata which are attached to exported objects once provided.\n\n\n\nModel run configuration\n\n\nOn the right are a few options to export model results. The download results button downloads run outputs (model objects, age predictions, metadata, etc), and the upload trianed model (only available after training or fine-tuning) allows for you to upload a model so it is available for subsequent inference or fine-tuning by any lab users. After upload, it will be immediately available for further workflows using that trained model.\n\n\n\nOutputs\n\n\n\n\n\nInputing data\n\n\nFormatting data\n\nFirst, you will need to identify the data that you’d like to work with. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:\nWhat you name columns matters!\nAll of the naming conventions are defined at the codebase level, within the file “constants” within the ML codebase. Here are some examples of a few of them at the time of writing:\n\nIDNAME = “id”\nRESPONSENAME = “age”\nWN_STRING_NAME = ’wn**’\nSPLITNAME = “split”\n\nThis means that the codebase and application will give columns with these names special treatment, and so when preparing data you will need to be very aware when you need to name your dataset with on of these columns. Here are their definitions:\n\nid: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present The contents are not as important, this could be a path to an image, an integer key, a hash, etc.\nage: this is the response variable, and while it is not necessary to include in every dataset (such as when this is not available and should be predicted with inference in the app), it is needed for model training or fine-tuning. The app will be flexible if the age column is provided but ages are only available for certain rows- for these datasets, mark missing ages as NA.\nwn**: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing ‘wn’ (note to self, this is a good back end improvement, should just match to start of string) is a wav number column. The numbers should directly follow the ‘wn’ prefix, so a value 8000 would be specified as “wn8000”. Decimal values are ok, ie wn8000.0023. The wav numbers can be in ascending or decending order but must be consecutive (cannot have other biological/spatiotemporal columns interspersed between them), and where they are located in the dataframe does not matter. (note to self: test all these assumptions, reduce if more permissive than remembered)\nsplit: OPTIONAL: this is defined if you would like to define custom training splits during training. If you do want to define training splits, you must define this columns with the exact categories “training”,“validation”,“test” (you may leave out one or two of these as desired). You can also define this column, and within the app still specify app generated splits as desired.\n\nIn addition to these specific values, there is also a registry of ‘standard variables’, which help combine like data between different groups and also contain information about the type of data which help for how the application treats these data types. Here is an example of how these are defined:\nSTANDARD_COLUMN_NAMES = {IDNAME:{‘data_type’:‘unq_text’}, SPLITNAME:{‘data_type’:‘int’}, ‘catch_year’ : {‘data_type’:‘int’}, ‘catch_month’: {‘data_type’: ‘int’}, ‘catch_day’: {‘data_type’: ‘int’}, ‘sex’ : {‘data_type’:‘categorical’}, RESPONSENAME : {‘data_type’:‘numeric’}, ‘latitude’ : {‘data_type’:‘numeric’}, ‘longitude’ : {‘data_type’:‘numeric’}, ‘region’: {‘data_type’: ‘categorical’}, ‘fish_length’: {‘data_type’: ‘numeric’}, ‘fish_weight’: {‘data_type’: ‘numeric’}, ‘otolith_weight’: {‘data_type’: ‘numeric’}, ‘gear_depth’: {‘data_type’: ‘numeric’}, ‘gear_temp’: {‘data_type’: ‘numeric’} }\nIn the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (note to self, this is a good back end improvement, define UNITS in this structure)\n***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a ‘one-hot-encoded’ column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the [“constants”] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated.\n\n\n\nApplication interpretation of a dataset based on names of columns in dataset\n\n\nFor some examples of properly formatted data, you can refer to sample datasets in the tests folder of the ML codebase.\n\n\n\nHow and if to split up data\n\nThere are two different different philosophies to provide data to the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use.\nAdditionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however, allow you to select which columns you’d like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data.\nThe app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns (***NOTE to self: this is a good QoL feature: temporary datasets.).\n\n\n\nApplication error for non-unique IDs\n\n\n\n\n\nLoading datasets into the application \n\nTo upload data into the app, use the upload button in the top left.\n\n\n\nData browsing and upload section of the app\n\n\n\n\n\nDetailed section by section\n\n\nSelect Datasets \n\nThis section allows you to select from previously uploaded data and upload new datasets. Any .csv file will be accepted, and the app will attempt to use certain columns based on exact matches to naming convention. Depending on the mode, the purpose of the dataset will be variable. For most downstream operations, datasets are used as a vertically concatenated (think ‘rbind’ in R) combination of all the selected datasets. Output data will use names and unique hashes of these component datasets for record keeping and more detailed breadowns outside of the app.\nSee next section for how these selected datasets are used for the different modes.\n\n\n\nData browsing and upload section of the app\n\n\n\n\n\nSelect Mode\n\nML models that fit the application native format can be directly uploaded. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible application model format. For inputting models generated through the application, simply path to the output .keras.zip file downloaded from a previous training event.\nThe datasets you have selected will function differently depending on what mode you select:\n\nIf ‘training’ is selected, the selected dataset(s) will function as training data.\nIf ‘inference’ is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of ‘age’ if available, otherwise will report histogram of output ages)\nIf ‘fine-tuning’ is selected, the selected dataset(s) will function as data for which the model is fine tuned on.\n\n\n\nTraining Mode\n\nThe training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique (“approach”). The “basic model” approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is ‘tuned’ to optimize performance over a sequence of optimization rounds.\nThese approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.\n\n\n\nAn example of two different available approaches in the training mode\n\n\n\n\n\nInference mode\n\nThe inference mode is used when a previously trained model exists, and you wish to apply it to a different dataset. The inference mode will take this chosen model and attempt, if compatible, to apply it to the user selected training data (indicated in the data selection pan in the top left). Note that the application will aggressively attempt to make datasets compatible, so pay attention to any information provided in the model metadata as well as in the data pane. Datasets run for inference can include the response column. If the response column is provided, R2 scores will be provided, if not, a histogram of ages with be provided, and if ages are partially known, both will be provided.\nWhen a trained model is selected, the app will display any available metadata. This can help assess compatibility with different datasets. This also includes metadata on any description given to the model (good practice is to discuss the training data used), as well as other information relevant for fine-tuning.\n\n\n\nModel metadata, inference\n\n\n\n\n\nFine-tuning mode\n\nThe fine-tuning mode is used when a previously trained model exists, and you wish to retain some information from the previous weights while ‘fine-tuning’ it on another dataset. This is an operation that takes some nuance, especially considering the shallow depth of most of these models which make it very easy to discard existing weights if number of training epochs and learning rate (NOTE to self: is this even in here? Add??) is not chosen carefully.\nThe model metadata contains information relevant for fine-tuning, including the max_bio_columns, which is relevant for fine-tuning as it represents the total amount of non-wavenumber columns supported by the model archetecture for further fine-tuning. If the number of non-wavenumber columns exceeds this value, further retraining will not be possible.\n\n\n\n\nData Columns\n\nThe data columns pane is responsive to both:\n\nThe column names in the selected datsets, and\nThe mode selected\n\nThe data pane will display the following information:\n\nWhether a given data column is selectable (optional) for the particular mode. Columns that are not selectable will generally say why.\n\nWav numbers and spectrography attributes for each different dataset, as well as if they are ‘valid’ (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)\nWhether columns match known reserved names (id, split, age), Standard Column names, or other.\nThe number of datasets where the particular column is included.\nAny special treatment of that particular column. This can include:\n\ntreated as a reserved column name (unselectable- automatically used)\none hot encoding was applied (default for standard columns marked as ‘categorical’ type)\ninformation on whether or not columns present in a selected model archetecture are present in provided datasets.\n\n\n\n\n\nInformation in Data Columns\n\n\n\n\nTraining Mode\n\nThe data pane will provide the above information, and should be fairly self explanatory. Data that are unselected will not be used to train the model. You may choose to unselect or retain partial matches between the different selected datasetes. Sometimes, it may help to remove partial matches for more consistent model performance between different datasets, whereas conversely it may help optimize for performance to leave certain partially available columns in.\n\n\n\nExamples of information feedback from Data Pane from selections; training mode\n\n\n\n\n\nInference Mode\n\nWhen a trained model is selected, and there are differences between the data columns used to train the model and the data columns available in the selected dataset, the application will unselect the data columns as an option without options to reselect, and state why. This could be either that:\n\nthe column is included in pretrained model (but absent from dataset)\nthe column is not used in pretrained model (but present in dataset)\n\nFor data columns that are present in both the dataset(s) and pretrained model, it will be optional to include them. When the data are fully available, you would usually elect to include available data that match the trained model. In cases where the selected datasets partially match what the model has available, you may prefer to remove a partially available column to allow for more equal treament by the model among the datasets. You can also choose to unselect certain data for experimental reasons (for example, to simulate the effect of a potentially absent data column in the future).\n\n\n\nExamples of information feedback from Data Pane from selections; inference mode\n\n\n\n\n\nFine-tuning Mode\n\nFor the fine-tuning mode, the Data Column section is a mix of the behaviors of training and inference. The model archetectures on first training are hardcoded (NOTE: for now) to provide a maximum of 100 biological/geospatial/temporal features for future trainings, allowing the same weights to be preserved while being flexible to dynamic data availability. This means that datasets that are now available for retraining will be possible to include even if not present in the original model. The Data Column pane will flag standard columns which, like in inference, are either present on the model archetecture and absent in the data (included in pretrained model), but will also provide this message when columns in the dataset are included in the pretrained model to help distinguish and clarify decisions when it comes to choosing to include/exlude new data or data already present in the model during retraining.\n\n\n\nExamples of information feedback from Data Pane from selections; fine-tuning mode\n\n\n\nBoth inference and fine-tuning will flag if a column was NULLIFIED in the last training event, meaning, the biological/geospatial/temporal data was named and included some point in the model training, but in the latest round was given a dummy value to deprioritize it for retraining. For inference, a column currently nullified shouldn’t be used except for experimental reasons. NULLIFIED columns can be added back in as desired for fine-tuning, but care should be taken when reintroducing it as performance impacts can be unpredictable.\n\n\n\nData Pane showing columns that were nullifed in last retraining\n\n\n\n\n\nSelect Parameters\n\nThe Select Parameters section allows you to define relevant parameters for the model run event. This is broken down into three component sections: signal processing parameters, mode parameters, and approach parameters. Some number of these are applicable for each mode, and the way each component section is interfaced with changes depending on the selected mode.\n\n\nSignal processing parameters\n\nThis section is where signal processing algorithms are selected. These can only be changed in a new training event.\n\n\n\nSignal processing options during training\n\n\nInterpolation can be set to custom bounds to promote interoperability in future use, otherwise it will default to the minimum and maximum values present in the training dataset.\n\n\n\nSignal processing options during training; custom interpoloation\n\n\nDuring inference or retraining, this section shows the preset parameters which will be applied to the model run but are unchangeable. If the wav numbers have different attributes (start, end, step), 1d interpolation will be applied to attempt to make the signal compatible.\n\n\n\nFixed signal processing choices for inference and retraining\n\n\n\n\n\nMode parameters\n\nMode parameters are generic to a specific mode: training, inference, or fine-tuning. Training options include a seed (to help ensure reproduceable initial random weights), custom defined splits, number of epochs, and early stopping parameters (note that manual early stopping is not currently supported).\nCurrently, there are no parameters specific to inference.\n\n\n\nParameters for training/fine-tuning modes\n\n\n\n\n\nApproach parameters\n\nMode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the “constants” file within the ML codebase)\n\n\n\nParameters for training/fine tuning approaches\n\n\n\n\n\n\nStats and graphical artifacts\n\nAfter a model run event, some performance feedback will be provided back in form of stats and graphical artifacts. What you get varies on a few conditions:\nTraining/fine tuning: you will get back performance stats grouped down by split. The performance stats will include n, r2, loss, mse (mean square error) and mae (mean average error). Generally r2 is your most informative feedback, and differences in r2 between the different splits can be used to quickly assess whether underfitting or overfitting has taken place (along with the training graph to the right of the run button). These modes will always produce a scatterplot of true age values vs. predicted values, allowing for more detailed information on performance bias and variance across the age range.\n\n\n\nTraining/fine-tuning, by split\n\n\nInference: If truth ages are provided when inference is run, inference will produce performance stats just like in training/fine-tuning. the data will now be grouped by component dataset, as split is not used during inference. (NOTE to self: should probably have stats breakdown at dataset level as well in this case?)\n\n\n\nInference, with truth ages\n\n\nIf not, it will produce a histogram of ages (NOTE to self: in unaged case, should probably still be grouped by dataset?).\n\n\n\nInference, no truth ages\n\n\nIf you have some ages provided and some ages missing in your training dataset, you will get both graphics.\n\n\n\nInference, mixed availability of ages\n\n\nGraphical outputs need to be downloaded individually as needed: they are not retained in the bundle of downloaded artifacts, although the information is there to recreate them as needed. Click in the top right option on any interactive figure to download it.\n\n\n\nInteractive figure with download option\n\n\nStatistical outputs are available as part of the standard downloaded results. All figures and stats can be recreated with downloaded datasets.\n\n\n\nDownload Results\n\nThe download results option will download to your local PC a bundle of files that are useful for quantifying performance, supporting more sophisticated downstream analysis, using the trained model outside of the application, and tracking versioning.\nWhen you download the data, it will save a bundle of file within a tar.gz format file.\n\n\n\nDownloaded data and results\n\n\n\n\n\nContents\n\n\nYou can use a tool like winzip or 7zip to unpack it locally as a directory. The included files are:\n\nstats.csv: the model run stats.\n[model_name].keras.zip: this is the model object with bundled metadata which is interoperable withe the apcation and ML codebase. The [model_name].keras.zip object can be further unpacked to extract the keras model and metadata, but the .zip file itself is used by both of these tools as the standard formatted model object. (see more information on working with this format in the ML codebase section LINK). This will match the name provided by you in the app, if provided, otherwise it will be ‘unnamed.keras.zip’.\nml_formatted_data_plus_untransformed_ages.csv: this is a dataset which includes the data as formatted prior to the model run event. It also includes untransformed ages. This allows you to understand the actual dataset that the model was trained on (includes formatting / post processing like, one hot encoding, applied scalers, interpolation, etc). This table also contains hashes to uniquely identify different component datasets, to allow for tracking assumptions of data used over time. This is the primary data object that should allow you to better understand the model behavior via the formatted dataset, do more sophisticated analysis of prediction performance downstream, and troubleshoot unexpected or undesireable behaviors.\nconfig.yml: this contains parameter selections for the model run event.\n\n\n\n\nOutput dataset for downstream analysis",
     "crumbs": [
       "Use",
-      "The codebase"
-    ]
-  },
-  {
-    "objectID": "content/exApp.html",
-    "href": "content/exApp.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Examples",
       "The app"
-    ]
-  },
-  {
-    "objectID": "content/Background.html",
-    "href": "content/Background.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Background"
     ]
   },
   {
@@ -115,6 +21,17 @@
     ]
   },
   {
+    "objectID": "content/selfHost.html",
+    "href": "content/selfHost.html",
+    "title": "Self hosting the application",
+    "section": "",
+    "text": "The application uses python Dash, which is a full python frontend/backend framework. Dash is built on top of flask, which is a common python backend archetecture for web applications usually paired with javascript as a front end.\nThe applications needs to be hosted on a server that can process the dynamic content associated with model training. This means that self-hosting is necessary on a dedicated server- serverless web solutions for static content (like this github page) do not allow for the computationally intensive work the application is doing.\nThere are a lot of potential options to host the application, and we will go into the important areas if self-hosting.\n\nHost\n\nThe Dash application and other elements of the software stack (docker, web server) need to be on a dedicated host. Since the currently used technique is not GPU limited, it does not require specialized hardware, but performs better on machines with 8+ cores CPU and 64GB+ RAM, particularly if concurrent use from multiple users is expected. The host could be on cloud or a local network, but just needs to be accesible through http or https from personal computers of the users.\n\nWeb server:\n\nDash needs to be hosted by a web server which can listen for https requests, forward them to the application, and reply to the user with https content. We are currently using NGINX for this purpose, which is the webserver framework used in ~30% of sites on the broader internet. Other popular alternatives for this include Traefik and Apache HTTP server, among many others.\nThe web server can use the domain name if one is available or a subdomain or page of that domain. Note that Dash also needs knowledge of the URL (subdomain or pages) being served, and for this I use an environmental variable so that the domain values given to Dash NGINX remain identical.\napp = Dash(__name__,requests_pathname_prefix=os.getenv('APPNAME'),routes_pathname_prefix=os.getenv('APPNAME'))\n\nDocker:\n\nDocker is not explictly necessary, but helps simplify and atomize the software stack to make each part (webserver and dash application) more manageable. Docker compose is a function of CLI (command line) docker which allows you to define multiple containers in the same application, which can pull from latest published images (meaning, you don’t have to maintain the web server application, just pull the off the shelf application) for any component parts of the application. Docker compose services are defined in a yaml file which instructs the engine how to build the application with containers from local sources or on the web.\n\nCloud storage\n\nThe application uses GCP storage buckets. Across cloud vendors, these are known as ‘S3’ type storage after the popular AWS equivalent service. The application is currently hardcoded to utilize GCP storage buckets, and so a lift-and-shift self-hosted version would also require a GCP project with the necessary storage buckets configured if it did not want to share data and models with the NMFS hosted application. Indeed, even the GCP project is currently hardcoded but that is a trivial change.\nThe application makes use of two buckets, one for temporary files (that is configured to automatically delete files on a certain interval) and one for data assets like models and datasets that are retained for further use via the application.\ntitle: test\ndescription: test2\n  indent: yes\n  no: yes\n    indent2: hello",
+    "crumbs": [
+      "Maintaining",
+      "Self-hosting"
+    ]
+  },
+  {
     "objectID": "content/contDocumentation.html",
     "href": "content/contDocumentation.html",
     "title": "Test page",
@@ -123,81 +40,6 @@
     "crumbs": [
       "Contributing",
       "The documentation"
-    ]
-  },
-  {
-    "objectID": "content/selfHost.html",
-    "href": "content/selfHost.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Maintaining",
-      "Self-hosting"
-    ]
-  },
-  {
-    "objectID": "content/contScience.html",
-    "href": "content/contScience.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Contributing",
-      "Evolving scientific techniques"
-    ]
-  },
-  {
-    "objectID": "content/dataPrep.html",
-    "href": "content/dataPrep.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Examples",
-      "Data preparation"
-    ]
-  },
-  {
-    "objectID": "content/FAQ.html",
-    "href": "content/FAQ.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "FAQ"
-    ]
-  },
-  {
-    "objectID": "content/maintApp.html",
-    "href": "content/maintApp.html",
-    "title": "App data and models",
-    "section": "",
-    "text": "The application stores data and models in GCP storage buckets that are seperately managed. These need to be curated and keep the amount of data and models manageable. In the future, when the concept of differently permissioned users is introduced into the app, we hope to integrate features to improve the ability for individual users to manage the data and models they have access to within the app.\n\n\n\nApplication data bucket\n\n\n\n\n\nApplication data bucket; datasets\n\n\nUsers need to be given a permission by site admins to allow for them to curate data and models. Some coordination will be needed to determine:\n\nWhat datasets should be temporary?\nWhen are datasets no longer useful or have been succeeded by a different dataset?\nIs a given model for repeated use, or is it a one off from a shorter lived experiment?\n\nThere are some possible strategies that potentially can make management of data and models easier:\n\nAssume all application data is temporary: If the data and models stored in the application state are to be considered non-essential resources (meaning- the datasets and models are frequently backed up and stored/versioned outside of the app), more users can be extended permissions to delete their data and models and this can allow for safer self-managed curation of data and models.\nUse naming conventions for data and/or models: Some simple naming conventions could help flag to users responsible for curating the application state whether or not certain objects are safe to delete. Examples could be:\n\n_temp: means that this file can always be safely deleted\n_prod: means that the dataset or model may be part of a production workflow, and should not be deleted\n_experiment[X]: giving a certain categorization to different datasets/models could help admins treat objects at a group level when making decisions of whether to persist or delete.\n\n\nOther notes:\n\nIntroducing a feature to allow for application ‘temp’ files that are automatically flushed on a short time schedule (1 day or so) may be a good improvement to lower the burden and coordination of file management.\n\nIf the app is self hosted, distinct bucket locations can be used to make managing the global state of data and models more feasible.",
-    "crumbs": [
-      "Maintaining",
-      "App data and models"
-    ]
-  },
-  {
-    "objectID": "content/futDirections.html",
-    "href": "content/futDirections.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Future Directions"
-    ]
-  },
-  {
-    "objectID": "content/Integrative.html",
-    "href": "content/Integrative.html",
-    "title": "Test page",
-    "section": "",
-    "text": "contents",
-    "crumbs": [
-      "Examples",
-      "Integrative"
     ]
   },
   {
@@ -234,24 +76,182 @@
     ]
   },
   {
-    "objectID": "content/Examples.html",
-    "href": "content/Examples.html",
+    "objectID": "content/dataPrep.html",
+    "href": "content/dataPrep.html",
     "title": "Test page",
     "section": "",
     "text": "contents",
     "crumbs": [
-      "Examples"
+      "Example Workflows",
+      "Data preparation"
     ]
   },
   {
-    "objectID": "content/useApp.html",
-    "href": "content/useApp.html",
-    "title": "Using the Application",
+    "objectID": "content/backScience.html",
+    "href": "content/backScience.html",
+    "title": "Test page",
     "section": "",
-    "text": "The layout\n\n\nPreparing to run models\n\nThe app components are ordered to go left right / top to bottom, usually in the order you would modify them in a typical workflow.\nAt the very top, we have a few buttons. The first is a link to go to the home page (NOTE TO SELF, may deprecate if move to one page app), a link to the documentation (this website), and in the right we have the git versions and buttons with links to the git repos.\n\n\n\nNavigation\n\n\nIn the top left, we have the data upload / select pane. You can browse through existing datasets in the app or upload further datasets.\n\n\n\nData browsing and upload section of the app\n\n\nThe datasets will do different things depending on which ‘mode’ is selected.\n\n\n\nMode and approach section of the app\n\n\nTo the right, once one or more datasets are selected, options are available in the Data Columns pane. This allows for selection of which columns will be considered in the model run event. Depending on mode and the dataset(s) selected, you will have different options here and your choices will result in different behaviors (see more details in Data Columns section)\n\n\n\nData Columns pane\n\n\nTo the right of that, you have options for parameterization. Within this pane, you can choose parameters for signal processing,\n\n\n\nParameters pane: signal processing\n\n\nparameters specific to the mode,\n\n\n\nParameters pane: mode general\n\n\nand parameters specific to the training/fine-tuning approach.\n\n\n\nParameters pane: approach\n\n\nOnce all of these sections have been considered, you can run the particular model event (will vary depending on mode) with the run button.\n\n\n\nRun button\n\n\n\n\n\nRunning models\n\nThe run button will execute the model run event based on the parameters provided in the aforementioned sections.\n\n\n\nRun button\n\n\nWhile the model is running, there is an intermediate app stage where you will be provided live information. The run button will display as a loading icon during training. Jobs cannot be canceled once started (NOTE: maybe can change if move to single page app?). To the left of the run button is logging information for the algorithm process.\n\n\n\nEvent logs\n\n\nTo the right is a live display of the training loss and validation loss, used to assess the appropriate degree of model fitting and help select a resonable training time or early stopping criterion.\n\n\n\nTraining loss curve\n\n\nWhile model training is ongoing, the numner of concurrent tensorflow jobs in the top bar will increment up by one. This is a global value shared between all users currently training models on the server, and exists to help identify if any errors or poor performance could be related to resource contention.\n\n\n\nConcurrent tensorflow jobs\n\n\nAny errors observed during model training will be displayed in the bottom left, accompanied by a banner error.\n\n\n\nErrors\n\n\n\n\n\nModel results\n\nIf the model run event has finished without errors, you can scroll down to see outputs relevant to the mode selected.\n\n\n\nCompleted run\n\n\nIn the center section are stats and graphical artifacts demonstrating model behaviors and performance. Depending on whether truth ages were provided, this will show a truth vs prediction scatterplot, a histogram, or both if age data are partially provided. Color values will indicate splits if in training or fine tuning mode, or dataset name if in inference mode.\n\n\n\nStats and graphical artifacts\n\n\nWhile also mentioned as a live feedback source while running models, the completed training loss curve is available in the top right. Note that all embedded visualizations have built in features such as allowing zooming, hovering points for more precise values, and saving views as an image directly.\n\n\n\nTraining loss artifact\n\n\nOn the left are the parameters used for the completed run. There are also two fields where you can add some descriptive information on the run: a name and a description, which are metadata which are attached to exported objects once provided.\n\n\n\nModel run configuration\n\n\nOn the right are a few options to export model results. The download results button downloads run outputs (model objects, age predictions, metadata, etc), and the upload trianed model (only available after training or fine-tuning) allows for you to upload a model so it is available for subsequent inference or fine-tuning by any lab users. After upload, it will be immediately available for further workflows using that trained model.\n\n\n\nOutputs\n\n\n\n\n\nInputing data\n\n\nFormatting data\n\nFirst, you will need to identify the data that you’d like to work with. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:\nWhat you name columns matters!\nAll of the naming conventions are defined at the codebase level, within the file “constants” within the ML codebase. Here are some examples of a few of them at the time of writing:\n\nIDNAME = “id”\nRESPONSENAME = “age”\nWN_STRING_NAME = ’wn**’\nSPLITNAME = “split”\n\nThis means that the codebase and application will give columns with these names special treatment, and so when preparing data you will need to be very aware when you need to name your dataset with on of these columns. Here are their definitions:\n\nid: a unique identifier that should be globally unique to the specific otolith. Keeping the id specific to the identity of the otolith is important, as when many datasets are being used for training there are filters within the app to ensure that incidental duplicate values that lead to dataset contamination and comprimised results are not present The contents are not as important, this could be a path to an image, an integer key, a hash, etc.\nage: this is the response variable, and while it is not necessary to include in every dataset (such as when this is not available and should be predicted with inference in the app), it is needed for model training or fine-tuning. The app will be flexible if the age column is provided but ages are only available for certain rows- for these datasets, mark missing ages as NA.\nwn**: this is the syntax that wav numbers should correspond to. The app will assume any column with characters containing ‘wn’ (note to self, this is a good back end improvement, should just match to start of string) is a wav number column. The numbers should directly follow the ‘wn’ prefix, so a value 8000 would be specified as “wn8000”. Decimal values are ok, ie wn8000.0023. The wav numbers can be in ascending or decending order but must be consecutive (cannot have other biological/spatiotemporal columns interspersed between them), and where they are located in the dataframe does not matter. (note to self: test all these assumptions, reduce if more permissive than remembered)\nsplit: OPTIONAL: this is defined if you would like to define custom training splits during training. If you do want to define training splits, you must define this columns with the exact categories “training”,“validation”,“test” (you may leave out one or two of these as desired). You can also define this column, and within the app still specify app generated splits as desired.\n\nIn addition to these specific values, there is also a registry of ‘standard variables’, which help combine like data between different groups and also contain information about the type of data which help for how the application treats these data types. Here is an example of how these are defined:\nSTANDARD_COLUMN_NAMES = {IDNAME:{‘data_type’:‘unq_text’}, SPLITNAME:{‘data_type’:‘int’}, ‘catch_year’ : {‘data_type’:‘int’}, ‘catch_month’: {‘data_type’: ‘int’}, ‘catch_day’: {‘data_type’: ‘int’}, ‘sex’ : {‘data_type’:‘categorical’}, RESPONSENAME : {‘data_type’:‘numeric’}, ‘latitude’ : {‘data_type’:‘numeric’}, ‘longitude’ : {‘data_type’:‘numeric’}, ‘region’: {‘data_type’: ‘categorical’}, ‘fish_length’: {‘data_type’: ‘numeric’}, ‘fish_weight’: {‘data_type’: ‘numeric’}, ‘otolith_weight’: {‘data_type’: ‘numeric’}, ‘gear_depth’: {‘data_type’: ‘numeric’}, ‘gear_temp’: {‘data_type’: ‘numeric’} }\nIn the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (note to self, this is a good back end improvement, define UNITS in this structure)\n***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a ‘one-hot-encoded’ column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the [“constants”] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated.\n\n\n\nApplication interpretation of a dataset based on names of columns in dataset\n\n\nFor some examples of properly formatted data, you can refer to sample datasets in the tests folder of the ML codebase.\n\n\n\nHow and if to split up data\n\nThere are two different different philosophies to provide data to the app. One is with larger, expansive datasets meant to cover large portions of your dataset. These should be named and curated for keeping in the app for continuous reuse and shared use.\nAdditionaly, you can split up datasets for more specific experiments involving varying along spatiotemporal groupings. While the app will allow you to aggregate data for processing in common, it does not contain features to split up larger datasets into smaller components (it does, however, allow you to select which columns you’d like to consider in a given model run event). If you are doing a yearly model inference/update workflow, you may choose to load data in different temporally bounded datasets (data_2016.csv, data_2017.csv, etc) which will allow for fine grain control of which to include or leave out. If you are interested in performing experiments over geospatial differences (data_GoA.csv, data_Ber.csv) this is another way you can split up data.\nThe app will flag and reject if there are multiple datasets that contain and equal id, to avoid dataset contaminiation issues during training that will comprimise results. It will do this at time of model training, meaning that datasets splitting up the same data in different ways can go into the application simultaneously. With many different possible ways to split up and organize data prior to the app, datasets of this style are best managed for short term use, and will need to get cleared out periodically by site admins to keep the number of total datasets to resonable levels in the dropdowns (***NOTE to self: this is a good QoL feature: temporary datasets.).\n\n\n\nApplication error for non-unique IDs\n\n\n\n\n\nLoading datasets into the application \n\nTo upload data into the app, use the upload button in the top left.\n\n\n\nData browsing and upload section of the app\n\n\n\n\n\nDetailed section by section\n\n\nSelect Datasets \n\nThis section allows you to select from previously uploaded data and upload new datasets. Any .csv file will be accepted, and the app will attempt to use certain columns based on exact matches to naming convention. Depending on the mode, the purpose of the dataset will be variable. For most downstream operations, datasets are used as a vertically concatenated (think ‘rbind’ in R) combination of all the selected datasets. Output data will use names and unique hashes of these component datasets for record keeping and more detailed breadowns outside of the app.\nSee next section for how these selected datasets are used for the different modes.\n\n\n\nData browsing and upload section of the app\n\n\n\n\n\nSelect Mode\n\nML models that fit the application native format can be directly uploaded. See examples of use of the ML codebase, including the case where you convert an existing model into the compatible application model format. For inputting models generated through the application, simply path to the output .keras.zip file downloaded from a previous training event.\nThe datasets you have selected will function differently depending on what mode you select:\n\nIf ‘training’ is selected, the selected dataset(s) will function as training data.\nIf ‘inference’ is selected, the selected dataset(s) will function as data upon which inference is applied (output statistics will use existance of ‘age’ if available, otherwise will report histogram of output ages)\nIf ‘fine-tuning’ is selected, the selected dataset(s) will function as data for which the model is fine tuned on.\n\n\n\nTraining Mode\n\nThe training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique (“approach”). The “basic model” approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is ‘tuned’ to optimize performance over a sequence of optimization rounds.\nThese approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.\n\n\n\nAn example of two different available approaches in the training mode\n\n\n\n\n\nInference mode\n\nThe inference mode is used when a previously trained model exists, and you wish to apply it to a different dataset. The inference mode will take this chosen model and attempt, if compatible, to apply it to the user selected training data (indicated in the data selection pan in the top left). Note that the application will aggressively attempt to make datasets compatible, so pay attention to any information provided in the model metadata as well as in the data pane. Datasets run for inference can include the response column. If the response column is provided, R2 scores will be provided, if not, a histogram of ages with be provided, and if ages are partially known, both will be provided.\nWhen a trained model is selected, the app will display any available metadata. This can help assess compatibility with different datasets. This also includes metadata on any description given to the model (good practice is to discuss the training data used), as well as other information relevant for fine-tuning.\n\n\n\nModel metadata, inference\n\n\n\n\n\nFine-tuning mode\n\nThe fine-tuning mode is used when a previously trained model exists, and you wish to retain some information from the previous weights while ‘fine-tuning’ it on another dataset. This is an operation that takes some nuance, especially considering the shallow depth of most of these models which make it very easy to discard existing weights if number of training epochs and learning rate (NOTE to self: is this even in here? Add??) is not chosen carefully.\nThe model metadata contains information relevant for fine-tuning, including the max_bio_columns, which is relevant for fine-tuning as it represents the total amount of non-wavenumber columns supported by the model archetecture for further fine-tuning. If the number of non-wavenumber columns exceeds this value, further retraining will not be possible.\n\n\n\n\nData Columns\n\nThe data columns pane is responsive to both:\n\nThe column names in the selected datsets, and\nThe mode selected\n\nThe data pane will display the following information:\n\nWhether a given data column is selectable (optional) for the particular mode. Columns that are not selectable will generally say why.\n\nWav numbers and spectrography attributes for each different dataset, as well as if they are ‘valid’ (fit the criteria for wn** columns and are formatted correctly), and equivalent (how many match the same spectroscopy settings)\nWhether columns match known reserved names (id, split, age), Standard Column names, or other.\nThe number of datasets where the particular column is included.\nAny special treatment of that particular column. This can include:\n\ntreated as a reserved column name (unselectable- automatically used)\none hot encoding was applied (default for standard columns marked as ‘categorical’ type)\ninformation on whether or not columns present in a selected model archetecture are present in provided datasets.\n\n\n\n\n\nInformation in Data Columns\n\n\n\n\nTraining Mode\n\nThe data pane will provide the above information, and should be fairly self explanatory. Data that are unselected will not be used to train the model. You may choose to unselect or retain partial matches between the different selected datasetes. Sometimes, it may help to remove partial matches for more consistent model performance between different datasets, whereas conversely it may help optimize for performance to leave certain partially available columns in.\n\n\n\nExamples of information feedback from Data Pane from selections; training mode\n\n\n\n\n\nInference Mode\n\nWhen a trained model is selected, and there are differences between the data columns used to train the model and the data columns available in the selected dataset, the application will unselect the data columns as an option without options to reselect, and state why. This could be either that:\n\nthe column is included in pretrained model (but absent from dataset)\nthe column is not used in pretrained model (but present in dataset)\n\nFor data columns that are present in both the dataset(s) and pretrained model, it will be optional to include them. When the data are fully available, you would usually elect to include available data that match the trained model. In cases where the selected datasets partially match what the model has available, you may prefer to remove a partially available column to allow for more equal treament by the model among the datasets. You can also choose to unselect certain data for experimental reasons (for example, to simulate the effect of a potentially absent data column in the future).\n\n\n\nExamples of information feedback from Data Pane from selections; inference mode\n\n\n\n\n\nFine-tuning Mode\n\nFor the fine-tuning mode, the Data Column section is a mix of the behaviors of training and inference. The model archetectures on first training are hardcoded (NOTE: for now) to provide a maximum of 100 biological/geospatial/temporal features for future trainings, allowing the same weights to be preserved while being flexible to dynamic data availability. This means that datasets that are now available for retraining will be possible to include even if not present in the original model. The Data Column pane will flag standard columns which, like in inference, are either present on the model archetecture and absent in the data (included in pretrained model), but will also provide this message when columns in the dataset are included in the pretrained model to help distinguish and clarify decisions when it comes to choosing to include/exlude new data or data already present in the model during retraining.\n\n\n\nExamples of information feedback from Data Pane from selections; fine-tuning mode\n\n\n\nBoth inference and fine-tuning will flag if a column was NULLIFIED in the last training event, meaning, the biological/geospatial/temporal data was named and included some point in the model training, but in the latest round was given a dummy value to deprioritize it for retraining. For inference, a column currently nullified shouldn’t be used except for experimental reasons. NULLIFIED columns can be added back in as desired for fine-tuning, but care should be taken when reintroducing it as performance impacts can be unpredictable.\n\n\n\nData Pane showing columns that were nullifed in last retraining\n\n\n\n\n\nSelect Parameters\n\nThe Select Parameters section allows you to define relevant parameters for the model run event. This is broken down into three component sections: signal processing parameters, mode parameters, and approach parameters. Some number of these are applicable for each mode, and the way each component section is interfaced with changes depending on the selected mode.\n\n\nSignal processing parameters\n\nThis section is where signal processing algorithms are selected. These can only be changed in a new training event.\n\n\n\nSignal processing options during training\n\n\nInterpolation can be set to custom bounds to promote interoperability in future use, otherwise it will default to the minimum and maximum values present in the training dataset.\n\n\n\nSignal processing options during training; custom interpoloation\n\n\nDuring inference or retraining, this section shows the preset parameters which will be applied to the model run but are unchangeable. If the wav numbers have different attributes (start, end, step), 1d interpolation will be applied to attempt to make the signal compatible.\n\n\n\nFixed signal processing choices for inference and retraining\n\n\n\n\n\nMode parameters\n\nMode parameters are generic to a specific mode: training, inference, or fine-tuning. Training options include a seed (to help ensure reproduceable initial random weights), custom defined splits, number of epochs, and early stopping parameters (note that manual early stopping is not currently supported).\nCurrently, there are no parameters specific to inference.\n\n\n\nParameters for training/fine-tuning modes\n\n\n\n\n\nApproach parameters\n\nMode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the “constants” file within the ML codebase)\n\n\n\nParameters for training/fine tuning approaches\n\n\n\n\n\n\nStats and graphical artifacts\n\nAfter a model run event, some performance feedback will be provided back in form of stats and graphical artifacts. What you get varies on a few conditions:\nTraining/fine tuning: you will get back performance stats grouped down by split. The performance stats will include n, r2, loss, mse (mean square error) and mae (mean average error). Generally r2 is your most informative feedback, and differences in r2 between the different splits can be used to quickly assess whether underfitting or overfitting has taken place (along with the training graph to the right of the run button). These modes will always produce a scatterplot of true age values vs. predicted values, allowing for more detailed information on performance bias and variance across the age range.\n\n\n\nTraining/fine-tuning, by split\n\n\nInference: If truth ages are provided when inference is run, inference will produce performance stats just like in training/fine-tuning. the data will now be grouped by component dataset, as split is not used during inference. (NOTE to self: should probably have stats breakdown at dataset level as well in this case?)\n\n\n\nInference, with truth ages\n\n\nIf not, it will produce a histogram of ages (NOTE to self: in unaged case, should probably still be grouped by dataset?).\n\n\n\nInference, no truth ages\n\n\nIf you have some ages provided and some ages missing in your training dataset, you will get both graphics.\n\n\n\nInference, mixed availability of ages\n\n\nGraphical outputs need to be downloaded individually as needed: they are not retained in the bundle of downloaded artifacts, although the information is there to recreate them as needed. Click in the top right option on any interactive figure to download it.\n\n\n\nInteractive figure with download option\n\n\nStatistical outputs are available as part of the standard downloaded results. All figures and stats can be recreated with downloaded datasets.\n\n\n\nDownload Results\n\nThe download results option will download to your local PC a bundle of files that are useful for quantifying performance, supporting more sophisticated downstream analysis, using the trained model outside of the application, and tracking versioning.\nWhen you download the data, it will save a bundle of file within a tar.gz format file.\n\n\n\nDownloaded data and results\n\n\n\n\n\nContents\n\n\nYou can use a tool like winzip or 7zip to unpack it locally as a directory. The included files are:\n\nstats.csv: the model run stats.\n[model_name].keras.zip: this is the model object with bundled metadata which is interoperable withe the apcation and ML codebase. The [model_name].keras.zip object can be further unpacked to extract the keras model and metadata, but the .zip file itself is used by both of these tools as the standard formatted model object. (see more information on working with this format in the ML codebase section LINK). This will match the name provided by you in the app, if provided, otherwise it will be ‘unnamed.keras.zip’.\nml_formatted_data_plus_untransformed_ages.csv: this is a dataset which includes the data as formatted prior to the model run event. It also includes untransformed ages. This allows you to understand the actual dataset that the model was trained on (includes formatting / post processing like, one hot encoding, applied scalers, interpolation, etc). This table also contains hashes to uniquely identify different component datasets, to allow for tracking assumptions of data used over time. This is the primary data object that should allow you to better understand the model behavior via the formatted dataset, do more sophisticated analysis of prediction performance downstream, and troubleshoot unexpected or undesireable behaviors.\nconfig.yml: this contains parameter selections for the model run event.\n\n\n\n\nOutput dataset for downstream analysis",
+    "text": "contents",
+    "crumbs": [
+      "Background",
+      "The science"
+    ]
+  },
+  {
+    "objectID": "content/Integrative.html",
+    "href": "content/Integrative.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Example Workflows",
+      "Integrative"
+    ]
+  },
+  {
+    "objectID": "content/ExampleWorkflows.html",
+    "href": "content/ExampleWorkflows.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Example Workflows"
+    ]
+  },
+  {
+    "objectID": "content/Maintaining.html",
+    "href": "content/Maintaining.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Maintaining"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Fourier transform near-infrared spectroscopy / machine learning otolith aging application",
+    "section": "",
+    "text": "The AFSC Age and Growth Program have pioneered machine learning methods to streamline specimen age predictions from otoliths. The approach is a multimodal convolutional neural network, (MM- CNN) as described in Benson et al. (2019), which encorporates two key data modalities: the entire range of wavenumbers of FT-NIR spectra, and corresponding biological and geospatial data.\nDuring development of this technique, scripts was developed in jupyter notebooks and demonstrated excellent performance in multiple species age prediction (cite). To bring these techniques to a wider audience, the code was refactored into functional programming. The core scripts were refactored into a functional programming codebase that encorporated ideas like data standards and the machine learning lifecycle to promote reuse and extention of the method across a broader range of data and machine learning techniques.\nThis codebase was developed in python, and currently supports the following features:\n\nFull machine learning lifecycle:\n\nTraining\nInference\nFine-tuning\n\nModel inference and fine-tuning will use the data given as best possible\n\nAutomatic interpolation of spectra as required\nNew data can be incorporated into fine tuning while preserving existing model weights\n\nBuilt in features for under-the-hood data formatting\n\nautomatic one hot encoding for known categorical variables\nawareness of standard variables to promote combining data where appropriate\n\n\nThe application serves to deliver the codebase core logic in an easy to use interface.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Fourier transform near-infrared spectroscopy / machine learning otolith aging application",
+    "section": "",
+    "text": "The AFSC Age and Growth Program have pioneered machine learning methods to streamline specimen age predictions from otoliths. The approach is a multimodal convolutional neural network, (MM- CNN) as described in Benson et al. (2019), which encorporates two key data modalities: the entire range of wavenumbers of FT-NIR spectra, and corresponding biological and geospatial data.\nDuring development of this technique, scripts was developed in jupyter notebooks and demonstrated excellent performance in multiple species age prediction (cite). To bring these techniques to a wider audience, the code was refactored into functional programming. The core scripts were refactored into a functional programming codebase that encorporated ideas like data standards and the machine learning lifecycle to promote reuse and extention of the method across a broader range of data and machine learning techniques.\nThis codebase was developed in python, and currently supports the following features:\n\nFull machine learning lifecycle:\n\nTraining\nInference\nFine-tuning\n\nModel inference and fine-tuning will use the data given as best possible\n\nAutomatic interpolation of spectra as required\nNew data can be incorporated into fine tuning while preserving existing model weights\n\nBuilt in features for under-the-hood data formatting\n\nautomatic one hot encoding for known categorical variables\nawareness of standard variables to promote combining data where appropriate\n\n\nThe application serves to deliver the codebase core logic in an easy to use interface.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "content/useCodebase.html",
+    "href": "content/useCodebase.html",
+    "title": "Using the Codebase",
+    "section": "",
+    "text": "Installing\nThe codebase is a python package that contains the underlying ML logic of the application, and can be used freestanding of the application. It can be installed from github via pip. The following line could be placed in a requirements.txt file, or installed independently in a python or conda virtual environment.\npip install git+https://github.com/noaa-afsc/ftnirs-ml-codebase.git\nOr, to install a specific version:\n#set this to the version you want to download\nVERSION_TAG=v0.4.0\n\npip install git+https://github.com/noaa-afsc/ftnirs-ml-codebase.git@$VERSION_TAG\n\nOnce the module is installed in your virtual environment, you can import it like any other package. The relevant functions live in the “code” module, constants / global variables live in the “constants” module.\n\n\n\nCodebase modules\n\n\n\nfrom ftnirsml.code import *\n\nfrom ftnirsml.constants import WN_MATCH,INFORMATIONAL,RESPONSE_COLUMNS\n\n\nPython scripting with the codebase\nIf conducting more specific research or simulations, or designing potential new features for the codebase, different aspects of the codebase used selectively.\nThere is a general flow that the codebase natively supports:\n\nLoad in datasets with pandas\n(if inference or fine tuning) Load in model object (*.keras.zip) from app or previous training from codebase\nFormat data with format_data\nPerform model training, inference, or fine-tuning\nExport outputs and model artifacts.\n\nHere is an example for a model training workflow from a sample dataset\n\n\nTraining example\n\n\n\n\n\n\nInference example\n\n\n\n\n\n\nFine-tuning example",
     "crumbs": [
       "Use",
+      "The codebase"
+    ]
+  },
+  {
+    "objectID": "content/futDirections.html",
+    "href": "content/futDirections.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Future Directions"
+    ]
+  },
+  {
+    "objectID": "content/Background.html",
+    "href": "content/Background.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Background"
+    ]
+  },
+  {
+    "objectID": "content/maintApp.html",
+    "href": "content/maintApp.html",
+    "title": "App data and models",
+    "section": "",
+    "text": "The application stores data and models in GCP storage buckets that are seperately managed. These need to be curated and keep the amount of data and models manageable. In the future, when the concept of differently permissioned users is introduced into the app, we hope to integrate features to improve the ability for individual users to manage the data and models they have access to within the app.\n\n\n\nApplication data bucket\n\n\n\n\n\nApplication data bucket; datasets\n\n\nUsers need to be given a permission by site admins to allow for them to curate data and models. Some coordination will be needed to determine:\n\nWhat datasets should be temporary?\nWhen are datasets no longer useful or have been succeeded by a different dataset?\nIs a given model for repeated use, or is it a one off from a shorter lived experiment?\n\nThere are some possible strategies that potentially can make management of data and models easier:\n\nAssume all application data is temporary: If the data and models stored in the application state are to be considered non-essential resources (meaning- the datasets and models are frequently backed up and stored/versioned outside of the app), more users can be extended permissions to delete their data and models and this can allow for safer self-managed curation of data and models.\nUse naming conventions for data and/or models: Some simple naming conventions could help flag to users responsible for curating the application state whether or not certain objects are safe to delete. Examples could be:\n\n_temp: means that this file can always be safely deleted\n_prod: means that the dataset or model may be part of a production workflow, and should not be deleted\n_experiment[X]: giving a certain categorization to different datasets/models could help admins treat objects at a group level when making decisions of whether to persist or delete.\n\n\nOther notes:\n\nIntroducing a feature to allow for application ‘temp’ files that are automatically flushed on a short time schedule (1 day or so) may be a good improvement to lower the burden and coordination of file management.\n\nIf the app is self hosted, distinct bucket locations can be used to make managing the global state of data and models more feasible.",
+    "crumbs": [
+      "Maintaining",
+      "App data and models"
+    ]
+  },
+  {
+    "objectID": "content/FAQ.html",
+    "href": "content/FAQ.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "FAQ"
+    ]
+  },
+  {
+    "objectID": "content/exCodebase.html",
+    "href": "content/exCodebase.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Example Workflows",
+      "The codebase"
+    ]
+  },
+  {
+    "objectID": "content/exApp.html",
+    "href": "content/exApp.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Example Workflows",
       "The app"
+    ]
+  },
+  {
+    "objectID": "content/contApp.html",
+    "href": "content/contApp.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Contributing",
+      "App features"
+    ]
+  },
+  {
+    "objectID": "content/Contributing.html",
+    "href": "content/Contributing.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Contributing"
+    ]
+  },
+  {
+    "objectID": "content/contScience.html",
+    "href": "content/contScience.html",
+    "title": "Test page",
+    "section": "",
+    "text": "contents",
+    "crumbs": [
+      "Contributing",
+      "Evolving scientific techniques"
     ]
   }
 ]

@@ -52,8 +52,8 @@ website:
             text: "The app"
           - href: content/useCodebase.qmd
             text: "The codebase"
-      - href: content/Examples.qmd
-        text: "Examples"
+      - href: content/ExampleWorkflows.qmd
+        text: "Example Workflows"
         contents:
           - href: content/dataPrep.qmd
             text: "Data preparation"

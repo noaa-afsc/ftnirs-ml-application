@@ -525,11 +525,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>The application uses GCP storage buckets. Across cloud vendors, these are known as ‘S3’ type storage after the popular AWS equivalent service. The application is currently hardcoded to utilize GCP storage buckets, and so a lift-and-shift self-hosted version would also require a GCP project with the necessary storage buckets configured if it did not want to share data and models with the NMFS hosted application. Indeed, even the GCP project is currently hardcoded but that is a trivial change.</p>
 <p>The application makes use of two buckets, one for temporary files (that is configured to automatically delete files on a certain interval) and one for data assets like models and datasets that are retained for further use via the application.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> test</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> test2</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">indent</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">no</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">indent2</span><span class="kw">:</span><span class="at"> hello</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below are some of the config files used to host the application. Below is the .env file, which provide information related to the particular hosting environmet. MLcode release dictates the version of the ML codebase the application will use in the backend (the application release version is dictated by the application git version used to build the docker container)</p>
+<p>Application .env (environmental variables):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">APPNAME:</span> <span class="st">"ftnirs_mlapp"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">HOSTIP:</span> <span class="st">"0.0.0.0"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">APPPORT:</span> <span class="st">"8050"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">PROXYPORT:</span> <span class="st">"443"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">DATA_BUCKET:</span> <span class="st">"mlapp_data_bucket"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">TMP_BUCKET:</span> <span class="st">"mlapp_tmp_bucket"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">MLCODE_RELEASE:</span> <span class="st">"v0.5.5"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The docker compose .yml file shows the different containers (Dash application and NGINX web server) that comprise the hosted application. Notice that in this case, docker compose will build the Dash application from a local directory, but you can also point this to a container repository with a prebuilt container if desired.</p>
+<p>Docker compose .yml:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">nginx</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:latest</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> nginx_server</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./nginx-selfsigned.key:/etc/nginx/cert/nginx-selfsigned.key</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./nginx-selfsigned.crt:/etc/nginx/cert/nginx-selfsigned.crt</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./template-variables:/etc/nginx/templates/default.conf.template:ro</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ${PROXYPORT}:${PROXYPORT}</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> 80:80</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">PROXYPORT</span><span class="kw">:</span><span class="at"> ${PROXYPORT}</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">APPPORT</span><span class="kw">:</span><span class="at"> ${APPPORT}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">HOSTIP</span><span class="kw">:</span><span class="at"> ${HOSTIP}</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DATA_BUCKET</span><span class="kw">:</span><span class="at"> ${DATA_BUCKET}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">TMP_BUCKET</span><span class="kw">:</span><span class="at"> ${TMP_BUCKET}</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">APPNAME</span><span class="kw">:</span><span class="at"> ${APPNAME}</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ftnirs_mlapp</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> always</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ftnirs_mlapp</span><span class="kw">:</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">context</span><span class="kw">:</span><span class="at"> ../ftnirs-mlapp</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">args</span><span class="kw">:</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">MLCODE_RELEASE</span><span class="kw">:</span><span class="at"> ${MLCODE_RELEASE}</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> ftnirs-mlapp</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ${APPPORT}:${APPPORT}</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">APPNAME</span><span class="kw">:</span><span class="at"> ${APPNAME}</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">APPPORT</span><span class="kw">:</span><span class="at"> ${APPPORT}</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">HOSTIP</span><span class="kw">:</span><span class="at"> ${HOSTIP}</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DATA_BUCKET</span><span class="kw">:</span><span class="at"> ${DATA_BUCKET}</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">TMP_BUCKET</span><span class="kw">:</span><span class="at"> ${TMP_BUCKET}</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">MLCODE_RELEASE</span><span class="kw">:</span><span class="at"> ${MLCODE_RELEASE}</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> always</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The NGINX web server also has a .conf file, where you can set routing information for requests to the server, as well as incorporate concepts like SSL and traffic management.</p>
+<p>NGINX.conf:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode conf code-with-copy"><code class="sourceCode toml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">server</span> <span class="er">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">listen</span> <span class="er">${</span><span class="dt">PROXYPORT</span><span class="er">}</span> <span class="dt">ssl</span><span class="er">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">server_name</span> <span class="er">${</span><span class="dt">HOSTIP</span><span class="er">};</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ssl_certificate</span> <span class="er">/</span><span class="dt">etc</span><span class="er">/</span><span class="dt">nginx</span><span class="er">/</span><span class="dt">cert</span><span class="er">/</span><span class="dt">nginx-selfsigned.crt</span><span class="er">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ssl_certificate_key</span> <span class="er">/</span><span class="dt">etc</span><span class="er">/</span><span class="dt">nginx</span><span class="er">/</span><span class="dt">cert</span><span class="er">/</span><span class="dt">nginx-selfsigned.key</span><span class="er">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">location</span> <span class="er">/</span> <span class="er">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">root</span> <span class="er">/</span><span class="dt">usr</span><span class="er">/</span><span class="dt">share</span><span class="er">/</span><span class="dt">nginx</span><span class="er">/</span><span class="dt">html</span><span class="er">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">index</span> <span class="dt">index.html</span><span class="er">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">location</span> <span class="er">/</span><span class="dt">ftnirs_mlapp</span><span class="er">/</span> <span class="er">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">proxy_pass</span> <span class="dt">http</span><span class="er">://</span><span class="dt">ftnirs_mlapp</span><span class="er">:${</span><span class="dt">APPPORT</span><span class="er">};</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">proxy_read_timeout</span> <span class="dt">600</span><span class="er">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">proxy_connect_timeout</span> <span class="dt">600</span><span class="er">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">proxy_send_timeout</span> <span class="dt">600</span><span class="er">;</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">client_max_body_size</span> <span class="dt">500M</span><span class="er">;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 

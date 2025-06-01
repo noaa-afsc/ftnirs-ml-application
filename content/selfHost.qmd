@@ -33,12 +33,89 @@ The application uses GCP storage buckets. Across cloud vendors, these are known 
 
 The application makes use of two buckets, one for temporary files (that is configured to automatically delete files on a certain interval) and one for data assets like models and datasets that are retained for further use via the application. 
 
-```yaml
-title: test
-description: test2
-  indent: yes
-  no: yes
-    indent2: hello
+Below are some of the config files used to host the application. Below is the .env file, which provide information related to the particular hosting environmet. MLcode release dictates the version of the ML codebase the application will use in the backend (the application release version is dictated by the application git version used to build the docker container)
+
+Application .env (environmental variables):
+```bash
+APPNAME: "ftnirs_mlapp"
+HOSTIP: "0.0.0.0"
+APPPORT: "8050"
+PROXYPORT: "443"
+DATA_BUCKET: "mlapp_data_bucket"
+TMP_BUCKET: "mlapp_tmp_bucket"
+MLCODE_RELEASE: "v0.5.5"
 ```
 
+The docker compose .yml file shows the different containers (Dash application and NGINX web server) that comprise the hosted application. Notice that in this case, docker compose will build the Dash application from a local directory, but you can also point this to a container repository with a prebuilt container if desired. 
+
+Docker compose .yml:
+```yaml
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    volumes:
+      - ./nginx-selfsigned.key:/etc/nginx/cert/nginx-selfsigned.key
+      - ./nginx-selfsigned.crt:/etc/nginx/cert/nginx-selfsigned.crt
+      - ./template-variables:/etc/nginx/templates/default.conf.template:ro
+    ports:
+      - ${PROXYPORT}:${PROXYPORT}
+      - 80:80
+    environment:
+      PROXYPORT: ${PROXYPORT}
+      APPPORT: ${APPPORT}
+      HOSTIP: ${HOSTIP}
+      DATA_BUCKET: ${DATA_BUCKET}
+      TMP_BUCKET: ${TMP_BUCKET}
+      APPNAME: ${APPNAME}
+    depends_on:
+      - ftnirs_mlapp
+    restart: always
+  ftnirs_mlapp:
+    build:
+      context: ../ftnirs-mlapp
+      args:
+        MLCODE_RELEASE: ${MLCODE_RELEASE}
+    container_name: ftnirs-mlapp
+    ports: 
+      - ${APPPORT}:${APPPORT}
+    environment:
+      APPNAME: ${APPNAME}
+      APPPORT: ${APPPORT}
+      HOSTIP: ${HOSTIP}
+      DATA_BUCKET: ${DATA_BUCKET}
+      TMP_BUCKET: ${TMP_BUCKET}
+      MLCODE_RELEASE: ${MLCODE_RELEASE}
+    restart: always
+```
+
+The NGINX web server also has a .conf file, where you can set routing information for requests to the server, as well as incorporate concepts like SSL and traffic management.   
+
+NGINX.conf:
+
+```conf
+server {
+
+  listen ${PROXYPORT} ssl;
+  server_name ${HOSTIP};
+
+  ssl_certificate /etc/nginx/cert/nginx-selfsigned.crt;
+  ssl_certificate_key /etc/nginx/cert/nginx-selfsigned.key;
+
+  location / {
+      root /usr/share/nginx/html;
+      index index.html;
+  }
+
+  location /ftnirs_mlapp/ {
+    proxy_pass http://ftnirs_mlapp:${APPPORT};
+  }
+
+  proxy_read_timeout 600;
+  proxy_connect_timeout 600;
+  proxy_send_timeout 600; 
+
+  client_max_body_size 500M;
+}
+```
 

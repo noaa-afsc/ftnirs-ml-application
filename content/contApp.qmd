@@ -17,9 +17,13 @@ The application is a 'multipage' dash app, despite it functionally being a one p
 
 .
 └── app/
+
     ├── app.py
+
     ├── app_constant.py
+
     └── pages/
+
         └── home.py
 
 * App.py: Responsible for high level app configuration, app routing, app boilerplate, and certain features of the application that cannot be declared at the page level (interact with the Dash 'app' object available here. 

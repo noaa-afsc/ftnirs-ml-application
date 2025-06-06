@@ -1,5 +1,5 @@
 ---
-title: Contribuing Documentation
+title: Contributing Documentation
 ---
 
 This website (the documentation) is a github static site, built with quarto. Quarto is markdown software
@@ -7,4 +7,4 @@ that supports embedded code well. There is nothing too tricky about this site ap
 
 * notebooks: I couldn't find a good way to integrate jupyter notebooks into quarto in a super native way, so I ended up using an 'iframe'. The trick here is that quarto shouldn't (also can't) do a lot of fancy backend work like model training, so it is better to embed prerendered routines into the site as complex processing will fail. The notebook was first rendered as an .ipynb file and then exported to an html document, which I did outside of quarto in Visual Studio code, but could be done in most jupyter engines.  
 
-Otherwise, maintaining the documentation is relatively simple. The general skills required are basic understanding of GitHub and willingness to learn a bit of markdown (quite easy). 
+Otherwise, maintaining and contributing to the documentation is relatively simple. The general skills required are basic understanding of GitHub and willingness to learn a bit of markdown (quite easy). Git makes it easy for multiple collaborators to contribute to the documentation source smoothly, with features like branches, merging, etc. 

@@ -16,17 +16,18 @@ https://github.com/noaa-afsc/ftnirs-mlapp
 The application is a 'multipage' dash app, despite it functionally being a one page app (originally, a help page was planned prior to deciding to put the documentation on github). This design means that the relevant code is roughly organized as follows: 
 
 .
+
 └── app/
 
-    ├── app.py
+|    ├── app.py
 
-    ├── app_constant.py
+|    ├── app_constant.py
 
-    └── pages/
+|    └── pages/
 
-        └── home.py
+|        └── home.py
 
-* App.py: Responsible for high level app configuration, app routing, app boilerplate, and certain features of the application that cannot be declared at the page level (interact with the Dash 'app' object available here. 
+* app.py: Responsible for high level app configuration, app routing, app boilerplate, and certain features of the application that cannot be declared at the page level (interact with the Dash 'app' object available here. 
 
 * app_constant.py: Responsible for content that will persist between pages like the top bar. 
 

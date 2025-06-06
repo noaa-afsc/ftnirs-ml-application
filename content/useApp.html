@@ -629,7 +629,7 @@ ul.task-list li input[type="checkbox"] {
 </summary>
 <p>First, you will need to identify the data that you’d like to work with. The technique specifically accepts both spectroscopy data along with other per-otolith biological or spatiotemporal contextual data. The codebase and app use a fairy primitive string matching protocol, and they both make assumptions about what certain columns do based on naming, so remember:</p>
 <p><strong>What you name columns matters!</strong></p>
-<p>All of the naming conventions are defined at the codebase level, within the file <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> within the ML codebase. Here are some examples of a few of them at the time of writing:</p>
+<p>All of the naming conventions are defined at the codebase level, within the file <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">constants.py</a> within the ML codebase. Here are some examples of a few of them at the time of writing:</p>
 <ul>
 <li>IDNAME = “id”</li>
 <li>RESPONSENAME = “age”</li>
@@ -646,7 +646,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In addition to these specific values, there is also a registry of ‘standard variables’, which help combine like data between different groups and also contain information about the type of data which help for how the application treats these data types. Here is an example of how these are defined:</p>
 <p>STANDARD_COLUMN_NAMES = {IDNAME:{‘data_type’:‘unq_text’}, SPLITNAME:{‘data_type’:‘int’}, ‘catch_year’ : {‘data_type’:‘int’}, ‘catch_month’: {‘data_type’: ‘int’}, ‘catch_day’: {‘data_type’: ‘int’}, ‘sex’ : {‘data_type’:‘categorical’}, RESPONSENAME : {‘data_type’:‘numeric’}, ‘latitude’ : {‘data_type’:‘numeric’}, ‘longitude’ : {‘data_type’:‘numeric’}, ‘region’: {‘data_type’: ‘categorical’}, ‘fish_length’: {‘data_type’: ‘numeric’}, ‘fish_weight’: {‘data_type’: ‘numeric’}, ‘otolith_weight’: {‘data_type’: ‘numeric’}, ‘gear_depth’: {‘data_type’: ‘numeric’}, ‘gear_temp’: {‘data_type’: ‘numeric’} }</p>
 <p>In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (<strong><em>note to self, this is a good back end improvement, define UNITS in this structure</em></strong>)</p>
-<p>***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a ‘one-hot-encoded’ column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the [“constants”] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated.</p>
+<p>***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a ‘one-hot-encoded’ column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the [constants.py] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/standard_columns.png" class="img-fluid figure-img"></p>
@@ -868,7 +868,7 @@ Mode parameters
 <summary>
 Approach parameters
 </summary>
-<p>Mode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">“constants”</a> file within the ML codebase)</p>
+<p>Mode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the <a href="https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py">constants</a> file within the ML codebase)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../content/images/parameters_signal_approach.png" class="img-fluid figure-img"></p>

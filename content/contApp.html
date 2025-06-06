@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Test page – ftnirs-ml-application Home</title>
+<title>Contributing Application features – ftnirs-ml-application Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -451,7 +451,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/Contributing.html">Contributing</a></li><li class="breadcrumb-item"><a href="../content/contApp.html">App features</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Test page</h1>
+<h1 class="title">Contributing Application features</h1>
 </div>
 
 
@@ -468,7 +468,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>contents</p>
+<p>The Dash Application codebase can be modified to add features to the application experience without modifying the core ML processes. Such features might include:</p>
+<ol type="1">
+<li>How data are managed and/or presented in the standard workflow</li>
+<li>Additional visual feedback</li>
+<li>Handling of edge cases</li>
+<li>Descriptive, explicit assertations, warnings, errors to help guide users and prevent misuse or bad ML outcomes.</li>
+</ol>
+<p>The application codebase is in the following repo, in the AFSC/Age and Growth Github Enterprise</p>
+<p>https://github.com/noaa-afsc/ftnirs-mlapp</p>
+<p>The application is a ‘multipage’ dash app, despite it functionally being a one page app (originally, a help page was planned prior to deciding to put the documentation on github). This design means that the relevant code is roughly organized as follows:</p>
+<p>. └── app/ ├── app.py ├── app_constant.py └── pages/ └── home.py</p>
+<ul>
+<li><p>App.py: Responsible for high level app configuration, app routing, app boilerplate, and certain features of the application that cannot be declared at the page level (interact with the Dash ‘app’ object available here.</p></li>
+<li><p>app_constant.py: Responsible for content that will persist between pages like the top bar.</p></li>
+<li><p>home.py: Contains core app features and ML logic.</p></li>
+</ul>
+<p>Changes to the application features will generally take place in the home.py file. Adding additional pages is possible. For instance, a signal analyzer could be added, or a more sophisticated data viewing/editing page. These would go under home.py, and you would want to ensure some navigation was possible to and from the homepage.</p>
+<p>Adding features or fixing bugs in the Dash frontend will require some python experience, and familiarity with frontend software concepts is helpful.</p>
 
 
 

@@ -106,7 +106,7 @@ First, you will need to identify the data that you'd like to work with. The tech
 
 **What you name columns matters!**
 
-All of the naming conventions are defined at the codebase level, within the file ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase. Here are some examples of a few of them at the time of writing:
+All of the naming conventions are defined at the codebase level, within the file [constants.py](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase. Here are some examples of a few of them at the time of writing:
 
 * IDNAME = "id"
 * RESPONSENAME = "age"
@@ -144,7 +144,7 @@ STANDARD_COLUMN_NAMES = {IDNAME:{'data_type':'unq_text'},
 
 In the above, declaring categorical variables will allow for instance the application to automatically apply one-hot encoding to these variables. (***note to self, this is a good back end improvement, define UNITS in this structure***)
 
-***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a 'one-hot-encoded' column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the ["constants"] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated. 
+***NOTE: there is also a sneaky/unexpected behavior to watch out for. The codebase relies on a simple string match to determine whether a column represents a 'one-hot-encoded' column once the one hot encoded categorical column has been expanded into multiple columns. This is essential a reserved sequence of characters, that if they conflict with column names may result in adverse behaviors. The reserved sequence of characters is defined in the [constants.py] file (https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) within the ML codebase, as ONE_HOT_FLAG. This should be kept static while data are in training cycles to allow for consistency of how these one-hot-encoded columns are treated. 
 
 ![Application interpretation of a dataset based on names of columns in dataset](/content/images/standard_columns.png)
 
@@ -344,7 +344,7 @@ Currently, there are no parameters specific to inference.
 
 <summary>Approach parameters</summary>
 
-Mode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the ["constants"](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) file within the ML codebase)
+Mode parameters are generic to a specific training approach. Approaches are meant to expand and vary to cover different resonable scientific approaches to model training. The parameters vary depending on the approach, and when developing new approaches, you can define these using a special data structure in the ML codebase to avoid having to develop the front end code to encorporate them (TRAINING APPROACHES variable in the [constants](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) file within the ML codebase)
 
 ![Parameters for training/fine tuning approaches](/content/images/parameters_signal_approach.png)
 

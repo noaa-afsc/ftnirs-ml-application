@@ -1,5 +1,32 @@
 ---
-title: Test page
+title: Evolving Scientific Techniques
 ---
 
-contents
+The application was designed around the assumption that otolith ages, comprised of both spectroscopy values and biological/geographic/temporal factors, can be effectively predicted with shallow, custom designed neural network models.The application and hosting strategy were designed around this assumption. 
+
+As the science evolves, the application or how it is hosted may adapt, or need to change significanty depending on how much the favored scientific technique changes. 
+
+Example scenario 1: 
+
+* A different model architecture / training approach is favored, while the initial assumptions remain true
+- Low consequence: Minimal work in codebases to add a new 'approach'. 
+
+The basic hieracrchy on the ML side is that various 'approaches' can be set up for model training or fine-tuning. This will allow for alternate techniques to slot in, so long as their inputs and outputs are consistent with the existing model. To make such a change, here are the steps that would need to be made: 
+1. Define a new approach as a python class in the ML codebase repo [code.py](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/code.py) file, keeping as consistent as possible with the other approaches. 
+2. Add in some metadata specific to that approach in the ML codebase repo [constants](https://github.com/noaa-afsc/ftnirs-ml-codebase/blob/main/ftnirsml/constants.py) file, keeping consistent with the structure and pattern of the others. The data here will allow for the Dash app to present different options for the approach to the user seamlessly. 
+3. In the application codebase, in [home.py](https://github.com/noaa-afsc/ftnirs-mlapp/blob/master/app/pages/home.py), hardcode add to the conditional in the model_run_event function where it says if mode == "Training", as  well as where it says if model == "Fine-tuning" if applicable.   
+
+Example scenario 2: 
+
+* A significantly deeper model, a model that uses different input data types (ie no spectroscopy, real imagery, etc), a non-neural network approach
+  - High consequence: Potentially large changes in codebase and application
+
+It is hard to generalize, but the farther we depart from the existing model the more engineering will be needed. In the case where a non-neural network approach were used, for instance, it may not be a huge lift, but it require certain accomodation, such as disabling or changing the visual feedback where it currently displays loss per epoch that is visible during training. Changes in the overall data inputs, outputs (such as imagery) may change the workflow, as well as necessary visual feedback within the workflow, significantly and may not be possible within the existing framework short of a complete overhaul. 
+
+Example scenario 3:
+
+* Approaches are used that increase the time needed for training (deeper neural nets and/or increased data volumes or snythetic data). 
+  - Medium consequence: Change in application hosting, not core design. 
+
+1. The steps from example scenario 1 will likely apply as this would consistitute a new approach. 
+2. If the comptutational training needs increase significantly, the problem may become GPU limited. This may result in the need for the host server to have GPU available, and under concurrent use by several users, may need to be hosted not just on a single server but an autoscaling service like Kubernetes.  

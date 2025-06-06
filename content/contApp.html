@@ -478,7 +478,14 @@ ul.task-list li input[type="checkbox"] {
 <p>The application codebase is in the following repo, in the AFSC/Age and Growth Github Enterprise</p>
 <p>https://github.com/noaa-afsc/ftnirs-mlapp</p>
 <p>The application is a ‘multipage’ dash app, despite it functionally being a one page app (originally, a help page was planned prior to deciding to put the documentation on github). This design means that the relevant code is roughly organized as follows:</p>
-<p>. └── app/ ├── app.py ├── app_constant.py └── pages/ └── home.py</p>
+<p>. └── app/</p>
+<pre><code>├── app.py
+
+├── app_constant.py
+
+└── pages/
+
+    └── home.py</code></pre>
 <ul>
 <li><p>App.py: Responsible for high level app configuration, app routing, app boilerplate, and certain features of the application that cannot be declared at the page level (interact with the Dash ‘app’ object available here.</p></li>
 <li><p>app_constant.py: Responsible for content that will persist between pages like the top bar.</p></li>

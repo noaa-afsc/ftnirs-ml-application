@@ -1,5 +1,9 @@
 ---
-title: Test page
+title: FAQ
 ---
 
-contents
+Page under construction. 
+
+Let us know questions in a [github issue](https://github.com/noaa-afsc/ftnirs-ml-application/issues) on the documentation repo :
+
+

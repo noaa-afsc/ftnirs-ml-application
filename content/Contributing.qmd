@@ -1,5 +1,10 @@
 ---
-title: Test page
+title: Contributing
 ---
 
-contents
+\
+[Evolving scientific techniques](../content/contScience.qmd)
+
+[App features](../content/contApp.qmd)
+
+[The codebase](../content/useCodebase.qmd)

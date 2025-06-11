@@ -1,5 +1,8 @@
 ---
-title: Test page
+title: Maintaining
 ---
 
-contents
+\
+[App data and models](../content/maintApp.qmd)
+
+[Self-hosting](../content/selfHost.qmd)

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Test page – ftnirs-ml-application Home</title>
+<title>Future Directions – ftnirs-ml-application Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -43,9 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1202c88099b7b67d4b64da151149b269.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-7ad160369fa1c49b10eedb3a7e81e124.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-1202c88099b7b67d4b64da151149b269.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-df8af0e33c2b25706292ba8168262bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c537e1bb270ade77a803f8d52ccc87d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-df8af0e33c2b25706292ba8168262bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -451,7 +451,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Test page</h1>
+<h1 class="title">Future Directions</h1>
 </div>
 
 
@@ -468,7 +468,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>contents</p>
+<p>Application engineer perspective:</p>
+<p>The application works well to prove that the scientific concept can be delivered in a graphical way with limited development time and no specialized front end experience- no small feat!</p>
+<p>The application lacks certain concepts that will may make using in production difficult and/or scaling up to an enterprise service: 1. No user identity associated, so application datasets and models cannot be managed in the application 2. Datasets are flexibile w.r.t columns, but to experiment with different subsets along rows, datasets need to be manually filtered and reuploaded. This creates more steps, leads to clutter in the application datasets, and increases the maintainance burden 3. The application is NOAA internal as the use of models is highly computationally resource consumptive, and allows for non-public data to be kept private. This leads to certain difficulties, like coordination with the network team to scale out the service, internal processes for DNS (domain name and certificate). However, maybe a public facing site in the future is more ideal if NMFS can afford to provide the computational resources. 4. The website is built using python Dash, which isn’t a standard in most development team’s skillset, and has plently of limitations as a framework. Refactoring the front end into a javascript framework would allow for an enterprise dev team to own the product for continued support.</p>
+<p>Addressing these concepts during future engineering work will help the application scale to more users.</p>
+<p>Lab/scientific staff perspective:</p>
+<p>?</p>
 
 
 

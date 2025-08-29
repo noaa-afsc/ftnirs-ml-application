@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,14 +38,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-df8af0e33c2b25706292ba8168262bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-c537e1bb270ade77a803f8d52ccc87d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-df8af0e33c2b25706292ba8168262bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-21bc3fa5c806a0d853f6d989331ecd97.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b4c19dc6ff3d3c1bf0a590fe4505266e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-21bc3fa5c806a0d853f6d989331ecd97.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -713,11 +713,36 @@ ul.task-list li input[type="checkbox"] {
 Training Mode
 </summary>
 <p>The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique (“approach”). The “basic model” approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is ‘tuned’ to optimize performance over a sequence of optimization rounds.</p>
-<p>These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.</p>
+<p>The latest addition is ‘irina CIE 2025’. This attempts to imitate Irina Benson’s best practice model before her retirement, and draws from <a href="https://github.com/noaa-afsc/age_model_pollock_CIErev2025/tree/696e4cc1eaf048df514cea712c44c9540779ad69">the example here</a>:</p>
+<p>If using it to represent her work, note the following caveats:</p>
+<ul>
+<li>It was not independently verified by Irina to be functionally equivalent to her method. It was later ported by Dan Woodrich in good faith effort to be as close as possible and includes the following minor tweaks, to better fit with the application model. Dan’s notes:</li>
+</ul>
+<ol type="1">
+<li>Early stopping was not used during hyperband epochs like in Irina’s implementation, only in final epoch. This was done as hyperband approach already handles the dynamic number of epochs, so it’s a bit quetsionable in the first place. Along with that, it is a nice convenience in the app to have early stopping be generic to all models and behave in a similar way, and so I choose to have early stopping only apply to the final training pass for all models to keep this behavior uniform.<br>
+</li>
+<li>The training/ validation split is handled as it normally is in the app, whereas in Irina’s approach the test/train is particularly handled. To emulate her choices, feed in only the ‘training’ data from Irina’s initial training dataset as a seperate dataset, and set validation at 33%, and test at 0%. Then to apply to the test data, choose inference on that seperate set.</li>
+<li>The implementation of the custom loss function was ported into a different keras object that was compatible with serialization for future retraining, to enable use of fine-tuning on models trained with this mode as seamlessly as for other modes. It is believe to be functionally equivalent, but this is difficult to test one-to-one.</li>
+<li>Irina’s code hard coded ‘length’ in the archetecture as the only included data aside from the spectrography values. To make this mode similarly flexible to the others, I adapted this architecture to be more generalized and allow the normal flexibility to provide other variables. To best emulate Irina’s choices, just select the fish_length variable during training and unselect the others.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Recommendation: although it may be hard to prove that nothing material has changed in this implementation, if using this method in a publication or report, it should be resonable to cite her method while providing these minor caveats. And, in practice, as long as your expirement design (avoiding dataset contamination) and performance statistics are good, this ultimately the more important justification for your method.</p>
+</div>
+</div>
+<p>These approaches are defined in the ML codebase, and new modes of any requested modifications of the existing modes must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../content/images/app_screenshot_data.png" class="img-fluid figure-img"></p>
-<figcaption>An example of two different available approaches in the training mode</figcaption>
+<p><img src="../content/images/mode_three_approaches.png" class="img-fluid figure-img"></p>
+<figcaption>An example of the three currently available approaches in the training mode</figcaption>
 </figure>
 </div>
 </details>

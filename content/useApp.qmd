@@ -210,9 +210,24 @@ The datasets you have selected will function differently depending on what mode 
 
 The training mode is used when a new model is being trained using a combination of user selected training data (indicated in the data selection pan in the top left) and a given techinique ("approach"). The "basic model" approach is a simple and minimal archetecture that is customizable in parameters and is trained in a single training event. The hyperband algorithm is a more sophisticated orchestration technique where model archecture is 'tuned' to optimize performance over a sequence of optimization rounds. 
 
-These approaches are defined in the ML codebase, and must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.
+The latest addition is 'irina CIE 2025'. This attempts to imitate Irina Benson's best practice model before her retirement, and draws from [the example here](https://github.com/noaa-afsc/age_model_pollock_CIErev2025/tree/696e4cc1eaf048df514cea712c44c9540779ad69): 
+ 
+If using it to represent her work, note the following caveats:
 
-![An example of two different available approaches in the training mode](/content/images/app_screenshot_data.png)
+- It was not independently verified by Irina to be functionally equivalent to her method. It was later ported by Dan Woodrich in good faith effort to be as close as possible and includes the following minor tweaks, to better fit with the application model. Dan's notes: 
+
+1. Early stopping was not used during hyperband epochs like in Irina's implementation, only in final epoch. This was done as hyperband approach already handles the dynamic number of epochs, so it's a bit quetsionable in the first place. Along with that, it is a nice convenience in the app to have early stopping be generic to all models and behave in a similar way, and so I choose to have early stopping only apply to the final training pass for all models to keep this behavior uniform.  
+2. The training/ validation split is handled as it normally is in the app, whereas in Irina's approach the test/train is particularly handled. To emulate her choices, feed in only the 'training' data from Irina's initial training dataset as a seperate dataset, and set validation at 33%, and test at 0%. Then to apply to the test data, choose inference on that seperate set. 
+3. The implementation of the custom loss function was ported into a different keras object that was compatible with serialization for future retraining, to enable use of fine-tuning on models trained with this mode as seamlessly as for other modes. It is believe to be functionally equivalent, but this is difficult to test one-to-one. 
+4. Irina's code hard coded 'length' in the archetecture as the only included data aside from the spectrography values. To make this mode similarly flexible to the others, I adapted this architecture to be more generalized and allow the normal flexibility to provide other variables. To best emulate Irina's choices, just select the fish_length variable during training and unselect the others. 
+
+::: callout-note
+Recommendation: although it may be hard to prove that nothing material has changed in this implementation, if using this method in a publication or report, it should be resonable to cite her method while providing these minor caveats. And, in practice, as long as your expirement design (avoiding dataset contamination) and performance statistics are good, this ultimately the more important justification for your method.
+:::
+
+These approaches are defined in the ML codebase, and new modes of any requested modifications of the existing modes must be encorporated into the application code itself. The application code has been designed so addition of additional approaches is straightforward.
+
+![An example of the three currently available approaches in the training mode](/content/images/mode_three_approaches.png)
 
 </details>
 
